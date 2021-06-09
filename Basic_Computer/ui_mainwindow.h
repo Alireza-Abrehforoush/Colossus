@@ -51,6 +51,7 @@ public:
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1286, 26));
         menuBar->setStyleSheet(QString::fromUtf8("background-color: rgb(30, 30, 30);\n"
+"\n"
 "color: rgb(255, 255, 255);"));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));

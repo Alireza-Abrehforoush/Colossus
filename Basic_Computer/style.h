@@ -2,6 +2,7 @@
 #define STYLE_H
 #include <QString>
 #include <QColor>
+#include <QVector>
 using namespace  std;
 namespace fonts
 {

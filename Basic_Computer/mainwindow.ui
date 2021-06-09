@@ -39,6 +39,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(30, 30, 30);
+
 color: rgb(255, 255, 255);</string>
    </property>
    <widget class="QMenu" name="menuFile">

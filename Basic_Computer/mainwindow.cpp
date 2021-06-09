@@ -2,8 +2,46 @@
 #include "ui_mainwindow.h"
 #include "style.h"
 #include "QColor"
+#include "QKeyEvent"
 #include "instructions.h"
-void MainWindow::text_edit_changed()
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (object==this->ui->text_edit && event->type()==QEvent::KeyPress)
+    {
+        QKeyEvent *e = static_cast < QKeyEvent * >(event);
+        int t=e->key();
+        if (e->key()==16777237)
+        {
+            if(this->auto_complete_members.empty()==false)
+            {
+                this->setWindowTitle("Down");
+                this->auto_complete_members[0]->hover();
+            }
+        }
+    }
+    return QMainWindow::eventFilter(object, event);
+}
+
+void MainWindow::updateAutoCompleteMembers()
+{
+    this->auto_complete_members.clear();
+     text_edit_custom_menu->clear();
+    QVector<QString>temp=instructions::mem_ref_vec+instructions::reg_ref_vec;
+    for (int i=0;i<temp.size();i++)
+    {
+        if (temp[i].startsWith(current_word))
+        {
+
+            AutoCompleteAction* a=new AutoCompleteAction(temp[i],this);
+            connect(a,SIGNAL(autocomplete_action_triggered(const QString&)),this,SLOT(auto_complete_selected(const QString&)));
+            this->auto_complete_members.push_back(a);
+            text_edit_custom_menu->addAction(a);
+        }
+    }
+
+}
+
+void MainWindow::text_edit_correct_color()
 {
     static bool is_run=false;
     if (is_run)
@@ -12,9 +50,10 @@ void MainWindow::text_edit_changed()
     c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
     QString temp=c.selectedText();
     QChar new_line(8233);
+
     if (temp==" " || temp==new_line|| temp==",")
     {
-
+        current_word.clear();
         int cnt=0;
         for(;;cnt++)
         {
@@ -49,20 +88,65 @@ void MainWindow::text_edit_changed()
         is_run=false;
 
     }
+    else
+    {
+        current_word=current_word+temp;
+    }
+
 
 
 
 }
 
+void MainWindow::text_edit_update_autocomplete()
+{
+
+    QRect rect=this->ui->text_edit->cursorRect();
+    QPoint p(rect.x(),rect.y());
+
+    this->updateAutoCompleteMembers();
+
+    text_edit_custom_menu->move(p.x(),p.y()+2*14);
+   // this->setWindowTitle(QString::number(p.y()));
+    //text_edit_custom_menu->show();
+
+}
+
+void MainWindow::auto_complete_selected(const QString &content)
+{
+    QString res;
+    for(int i=current_word.size();i<content.size();i++)
+    {
+        res.append(content[i]);
+    }
+    ui->text_edit->insertPlainText(res);
+    this->text_edit_custom_menu->clear();
+}
+
+void MainWindow::keyPressedEvent(QKeyEvent *e)
+{   if (e->key()==Qt::DownArrow)
+     this->setWindowTitle("Event");
+
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    text_edit_custom_menu(new QMenu())
+
 {
+
     ui->setupUi(this);
     this->ui->text_edit->setStyleSheet(styles::bg_styles[styles::mode]);
+    text_edit_custom_menu->setParent(this->ui->text_edit);
 
-    connect(this->ui->text_edit,SIGNAL(textChanged()),this,SLOT(text_edit_changed()));
-    this->ui->text_edit->insertPlainText("hello world ADD");
+    this->ui->text_edit->installEventFilter(this);
+
+    this->text_edit_custom_menu->setStyleSheet("QMenu{background-color : rgb(255,255,255);color : rgb(0,0,0)}\nQMenu::item::selected{background-color : rgb(85,255,255);}");
+    this->ui->text_edit->insertPlainText("ORG 100\n");
+    connect(this->ui->text_edit,SIGNAL(textChanged()),this,SLOT(text_edit_correct_color()));
+    connect(this->ui->text_edit,SIGNAL(textChanged()),this,SLOT(text_edit_update_autocomplete()));
+
 
 }
 

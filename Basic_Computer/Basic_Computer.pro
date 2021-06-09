@@ -27,12 +27,14 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    styles.cpp
+    styles.cpp \
+    autocompleteaction.cpp
 
 HEADERS += \
         mainwindow.h \
     style.h \
-    instructions.h
+    instructions.h \
+    autocompleteaction.h
 
 FORMS += \
         mainwindow.ui
