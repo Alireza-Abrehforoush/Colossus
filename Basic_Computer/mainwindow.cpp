@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "style.h"
@@ -15,7 +16,15 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
             if(this->auto_complete_members.empty()==false)
             {
                 this->setWindowTitle("Down");
-                this->auto_complete_members[0]->hover();
+
+
+                QPoint p(this->text_edit_custom_menu->pos()+this->ui->text_edit->pos()+this->ui->centralWidget->pos()+this->pos());
+                qDebug()<<this->text_edit_custom_menu->pos().x()<<"\t"<<text_edit_custom_menu->pos().y()<<"\n";
+                p.setX(p.x()+40);
+                p.setY(p.y()+55);
+                this->text_edit_custom_menu->cursor().setPos(p);
+                this->text_edit_custom_menu->cursor().setShape(Qt::CursorShape::ArrowCursor);
+
             }
         }
     }
@@ -32,7 +41,7 @@ void MainWindow::updateAutoCompleteMembers()
         if (temp[i].startsWith(current_word))
         {
 
-            AutoCompleteAction* a=new AutoCompleteAction(temp[i],this);
+            AutoCompleteAction* a=new AutoCompleteAction(temp[i],this->text_edit_custom_menu);
             connect(a,SIGNAL(autocomplete_action_triggered(const QString&)),this,SLOT(auto_complete_selected(const QString&)));
             this->auto_complete_members.push_back(a);
             text_edit_custom_menu->addAction(a);
@@ -41,13 +50,29 @@ void MainWindow::updateAutoCompleteMembers()
 
 }
 
+void MainWindow::text_edit_correct_color(int begin_pos, int end_pos)
+{
+ QTextCursor c=ui->text_edit->textCursor();
+ c.setPosition(begin_pos);
+ while(c.position()<=end_pos)
+     c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
+ QString total_text=c.selectedText();
+
+    QStringList l=total_text.split(" ");
+    qDebug()<<"space number of it is "<<l.size()<<"\n";
+}
+
 void MainWindow::text_edit_correct_color()
 {
+
     static bool is_run=false;
+    bool checked_befor=false;
+    //static int befor_pos=ui->text_edit->textCursor().position();
     if (is_run)
         return;
     QTextCursor c=ui->text_edit->textCursor();
     c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
+    //int cur_pos=c.position();
     QString temp=c.selectedText();
     QChar new_line(8233);
 
@@ -59,6 +84,8 @@ void MainWindow::text_edit_correct_color()
         {
             c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
              temp=c.selectedText();
+//             if(c.position()==befor_pos)
+//                 checked_befor=true;
              QChar ch=temp[0];
             if(temp[0]==' '|| temp[0]==new_line|| temp[0]==',' || c.atStart())
                 break;
@@ -85,7 +112,12 @@ void MainWindow::text_edit_correct_color()
         this->ui->text_edit->insertPlainText(end);
         QString contain=ui->text_edit->toPlainText();
         temp="";
+        if (checked_befor==false)
+        {
+           // this->text_edit_correct_color(befor_pos,this->ui->text_edit->textCursor().position());
+        }
         is_run=false;
+        //befor_pos=cur_pos;
 
     }
     else
@@ -132,7 +164,7 @@ void MainWindow::keyPressedEvent(QKeyEvent *e)
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    text_edit_custom_menu(new QMenu())
+    text_edit_custom_menu(new QMenu(this))
 
 {
 
