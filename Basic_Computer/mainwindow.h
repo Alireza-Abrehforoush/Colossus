@@ -12,6 +12,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QVector<QAction*> auto_complete_members;
+    int current_member_index=-1;
     QMenu * text_edit_custom_menu=nullptr;
     QString current_word="";
     bool eventFilter(QObject *object, QEvent *event);

@@ -11,21 +11,65 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     {
         QKeyEvent *e = static_cast < QKeyEvent * >(event);
         int t=e->key();
-        if (e->key()==16777237)
+        qDebug()<<t<<"\n";
+        int down_key_code=16777237;
+        int up_key_code=16777235;
+        int tab_key_code=16777217;
+        int enter_key_code=16777220;
+        if (e->key()==down_key_code)//down key pressed
         {
             if(this->auto_complete_members.empty()==false)
             {
-                this->setWindowTitle("Down");
 
 
-                QPoint p(this->text_edit_custom_menu->pos()+this->ui->text_edit->pos()+this->ui->centralWidget->pos()+this->pos());
-                qDebug()<<this->text_edit_custom_menu->pos().x()<<"\t"<<text_edit_custom_menu->pos().y()<<"\n";
-                p.setX(p.x()+40);
-                p.setY(p.y()+55);
-                this->text_edit_custom_menu->cursor().setPos(p);
-                this->text_edit_custom_menu->cursor().setShape(Qt::CursorShape::ArrowCursor);
+
+//                QPoint p(this->text_edit_custom_menu->pos()+this->ui->text_edit->pos()+this->ui->centralWidget->pos()+this->pos());
+//                qDebug()<<this->text_edit_custom_menu->pos().x()<<"\t"<<text_edit_custom_menu->pos().y()<<"\n";
+//                p.setX(p.x()+40);
+//                p.setY(p.y()+55);
+//                this->text_edit_custom_menu->cursor().setPos(p);
+//                this->text_edit_custom_menu->cursor().setShape(Qt::CursorShape::ArrowCursor);
+                if(this->current_member_index<this->auto_complete_members.size()-1)
+                {
+                    this->current_member_index++;
+
+                    this->text_edit_custom_menu->setActiveAction(this->auto_complete_members[this->current_member_index]);
+                }
+
+                return true;
 
             }
+
+        }
+
+        else if(e->key()==up_key_code)//up key pressed
+        {
+            if(this->auto_complete_members.empty()==false)
+            {
+                if(this->current_member_index>0)
+                {   this->current_member_index--;
+
+                    this->text_edit_custom_menu->setActiveAction(this->auto_complete_members[this->current_member_index]);
+
+                }
+                return true;
+            }
+        }
+        else if(e->key()==tab_key_code || e->key()==enter_key_code)
+        {
+            this->setWindowTitle("Tab");
+            QAction* active_act=this->text_edit_custom_menu->activeAction();
+            if(active_act)
+
+            {
+                    active_act->trigger();
+                    this->ui->text_edit->insertPlainText(" ");
+
+                    return true;
+
+            }
+
+
         }
     }
     return QMainWindow::eventFilter(object, event);
@@ -52,6 +96,7 @@ void MainWindow::updateAutoCompleteMembers()
 
 void MainWindow::text_edit_correct_color(int begin_pos, int end_pos)
 {
+
  QTextCursor c=ui->text_edit->textCursor();
  c.setPosition(begin_pos);
  while(c.position()<=end_pos)
@@ -132,7 +177,7 @@ void MainWindow::text_edit_correct_color()
 
 void MainWindow::text_edit_update_autocomplete()
 {
-
+    this->current_member_index=-1;
     QRect rect=this->ui->text_edit->cursorRect();
     QPoint p(rect.x(),rect.y());
 
