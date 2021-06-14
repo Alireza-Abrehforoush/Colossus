@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTextCursor>
 #include "autocompleteaction.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
     void updateAutoCompleteMembers();
     void text_edit_correct_color(int begin_pos,int end_pos);
     QString ignoreComments(const QString& text);
+    QVector<QString> detectVariable(const QString& text);
 private slots:
     void text_edit_correct_color();
     void text_edit_update_autocomplete();

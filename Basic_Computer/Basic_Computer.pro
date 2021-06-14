@@ -29,14 +29,17 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     styles.cpp \
-    autocompleteaction.cpp
+    autocompleteaction.cpp \
+    variable.cpp
 
 HEADERS += \
+    assembe.h \
     instruction.h \
         mainwindow.h \
     style.h \
     instructions.h \
-    autocompleteaction.h
+    autocompleteaction.h \
+    variable.h
 
 FORMS += \
         mainwindow.ui

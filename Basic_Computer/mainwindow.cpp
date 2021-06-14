@@ -5,6 +5,8 @@
 #include "QColor"
 #include "QKeyEvent"
 #include "instructions.h"
+#include "variable.h"
+#include "assembe.h"
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
     if (object==this->ui->text_edit && event->type()==QEvent::KeyPress)
@@ -146,6 +148,24 @@ QString MainWindow::ignoreComments(const QString &raw_text)
     return refined_text;
 }
 
+QVector<QString> MainWindow::detectVariable(const QString &text)
+{
+    QVector<QString> total = text.split("\n").toVector();
+    QVector<QString> instructions;
+    for(long long int i = 0; i < total.size(); i++)
+    {
+        if(total[i].indexOf(',') >= 0)
+        {
+            AssemblyVariable::Variables_list.push_back(new Variable(total[i], this));
+        }
+        else
+        {
+            instructions.push_back(total[i]);
+        }
+    }
+    return instructions;
+}
+
 void MainWindow::text_edit_correct_color()
 {
 
@@ -241,8 +261,8 @@ void MainWindow::auto_complete_selected(const QString &content)
 
 void MainWindow::assemble_triggered()
 {
-    this->ui->text_edit->insertPlainText("\n\n\n@@@@@@@@@@@@@@@@@@@@@@@\n\n");
-    this->ui->text_edit->insertPlainText(this->ignoreComments(ui->text_edit->toPlainText()));
+    QString text_without_comment = this->ignoreComments(this->ui->text_edit->toPlainText());
+    QVector<QString> instructions = this->detectVariable(text_without_comment);
 }
 
 void MainWindow::keyPressedEvent(QKeyEvent *e)
