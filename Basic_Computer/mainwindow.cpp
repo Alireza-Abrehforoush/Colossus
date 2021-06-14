@@ -11,7 +11,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     {
         QKeyEvent *e = static_cast < QKeyEvent * >(event);
         int t=e->key();
-        qDebug()<<t<<"\n";
+        //qDebug()<<t<<"\n";
         int down_key_code=16777237;
         int up_key_code=16777235;
         int tab_key_code=16777217;
@@ -104,7 +104,46 @@ void MainWindow::text_edit_correct_color(int begin_pos, int end_pos)
  QString total_text=c.selectedText();
 
     QStringList l=total_text.split(" ");
-    qDebug()<<"space number of it is "<<l.size()<<"\n";
+    //qDebug()<<"space number of it is "<<l.size()<<"\n";
+}
+
+QString MainWindow::ignoreComments(const QString &raw_text)
+{
+    QString refined_text = "";
+    bool comment_began = false;
+    for(long long int i = 0; i < raw_text.size(); i++)
+    {
+        
+        if(raw_text.at(i) == '/')
+        {
+            if(i == raw_text.size() - 1)
+            {
+                continue;
+            }
+            else
+            {
+                if(raw_text.at(i + 1) == '/')
+                {
+                    i += 2;
+                    while(raw_text.at(i) != '\n')
+                    {
+                        i++;
+                    }
+                }
+                else if(raw_text.at(i + 1) == '*')
+                {
+                    i += 2;
+                    while(i < raw_text.size() - 1 && !(raw_text.at(i) == '*' && raw_text.at(i + 1) == '/'))
+                    {
+                        i++;
+                    }
+                    i += 2;
+                }
+            }
+        }
+        refined_text.push_back(raw_text.at(i));
+    }
+    return refined_text;
 }
 
 void MainWindow::text_edit_correct_color()
@@ -200,6 +239,12 @@ void MainWindow::auto_complete_selected(const QString &content)
     this->text_edit_custom_menu->clear();
 }
 
+void MainWindow::assemble_triggered()
+{
+    this->ui->text_edit->insertPlainText("\n\n\n@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+    this->ui->text_edit->insertPlainText(this->ignoreComments(ui->text_edit->toPlainText()));
+}
+
 void MainWindow::keyPressedEvent(QKeyEvent *e)
 {   if (e->key()==Qt::DownArrow)
      this->setWindowTitle("Event");
@@ -221,9 +266,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->text_edit_custom_menu->setStyleSheet("QMenu{background-color : rgb(255,255,255);color : rgb(0,0,0)}\nQMenu::item::selected{background-color : rgb(85,255,255);}");
     this->ui->text_edit->insertPlainText("ORG 100\n");
-    connect(this->ui->text_edit,SIGNAL(textChanged()),this,SLOT(text_edit_correct_color()));
-    connect(this->ui->text_edit,SIGNAL(textChanged()),this,SLOT(text_edit_update_autocomplete()));
-
+    connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_correct_color()));
+    connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_update_autocomplete()));
+    connect(this->ui->actionAssemble_all_2, SIGNAL(triggered()), this, SLOT(assemble_triggered()));
 
 }
 
