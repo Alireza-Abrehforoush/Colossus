@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINWINDOW_BNBVCMNNBCMNBMCJNKMXMSL
+#define MAINWINDOW_BNBVCMNNBCMNBMCJNKMXMSL
 
 #include <QMainWindow>
 #include <QTextCursor>
@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow
     void text_edit_correct_color(int begin_pos,int end_pos);
     QString ignoreComments(const QString& text);
     QVector<QString> detectVariable(const QString& text);
+
 private slots:
     void text_edit_correct_color();
     void text_edit_update_autocomplete();

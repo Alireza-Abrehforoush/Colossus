@@ -25,17 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    flag.cpp \
     instruction.cpp \
         main.cpp \
         mainwindow.cpp \
+    memory.cpp \
+    register.cpp \
     styles.cpp \
     autocompleteaction.cpp \
     variable.cpp
 
 HEADERS += \
     assembe.h \
+    flag.h \
     instruction.h \
         mainwindow.h \
+    memory.h \
+    register.h \
     style.h \
     instructions.h \
     autocompleteaction.h \
