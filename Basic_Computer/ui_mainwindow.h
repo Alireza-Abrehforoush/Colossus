@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.14.2
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -88,13 +88,13 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionAssemble_all->setText(QCoreApplication::translate("MainWindow", "Assemble all", nullptr));
-        actionAssemble_all_2->setText(QCoreApplication::translate("MainWindow", "Assemble all", nullptr));
-        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
-        menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
-        menuAssemble->setTitle(QCoreApplication::translate("MainWindow", "Assemble", nullptr));
-        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionAssemble_all->setText(QApplication::translate("MainWindow", "Assemble all", nullptr));
+        actionAssemble_all_2->setText(QApplication::translate("MainWindow", "Assemble all", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
+        menuAssemble->setTitle(QApplication::translate("MainWindow", "Assemble", nullptr));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
     } // retranslateUi
 
 };

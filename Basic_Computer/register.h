@@ -7,7 +7,7 @@ class Register : public QObject
 {
     Q_OBJECT
 private:
-    QVector<bool> value;
+    //QVector<bool> value;
     int size;
 public:
     explicit Register(int size, QObject *parent = nullptr);
@@ -21,14 +21,14 @@ signals:
 
 namespace Registers
 {
-    Register SC;
-    Register PC;
-    Register AR;
-    Register IR;
-    Register DR;
-    Register AC;
-    Register TR;
-    Register INPR;
-    Register OUTR;
+//    Register SC;
+//    Register PC;
+//    Register AR;
+//    Register IR;
+//    Register DR;
+//    Register AC;
+//    Register TR;
+//    Register INPR;
+//    Register OUTR;
 }
 #endif

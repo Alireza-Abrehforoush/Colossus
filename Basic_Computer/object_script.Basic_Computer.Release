@@ -1,0 +1,15 @@
+release/flag.o
+release/instruction.o
+release/main.o
+release/mainwindow.o
+release/memory.o
+release/register.o
+release/styles.o
+release/autocompleteaction.o
+release/variable.o
+release/moc_flag.o
+release/moc_mainwindow.o
+release/moc_memory.o
+release/moc_register.o
+release/moc_autocompleteaction.o
+release/moc_variable.o

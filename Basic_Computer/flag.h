@@ -17,16 +17,16 @@ signals:
 
 };
 
-namespace Flags
-{
-    Flag I;
-    Flag S;
-    Flag E;
-    Flag R;
-    Flag IEN;
-    Flag FGI;
-    Flag FGO;
+//namespace Flags
+//{
+//    Flag I;
+//    Flag S;
+//    Flag E;
+//    Flag R;
+//    Flag IEN;
+//    Flag FGI;
+//    Flag FGO;
 
-}
+//}
 
 #endif // FLAG_H

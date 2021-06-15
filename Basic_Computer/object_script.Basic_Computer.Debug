@@ -1,0 +1,15 @@
+debug/flag.o
+debug/instruction.o
+debug/main.o
+debug/mainwindow.o
+debug/memory.o
+debug/register.o
+debug/styles.o
+debug/autocompleteaction.o
+debug/variable.o
+debug/moc_flag.o
+debug/moc_mainwindow.o
+debug/moc_memory.o
+debug/moc_register.o
+debug/moc_autocompleteaction.o
+debug/moc_variable.o
