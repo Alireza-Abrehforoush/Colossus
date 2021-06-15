@@ -33,7 +33,8 @@ SOURCES += \
     register.cpp \
     styles.cpp \
     autocompleteaction.cpp \
-    variable.cpp
+    variable.cpp \
+    parser.cpp
 
 HEADERS += \
     assembe.h \
@@ -45,7 +46,8 @@ HEADERS += \
     style.h \
     instructions.h \
     autocompleteaction.h \
-    variable.h
+    variable.h \
+    parser.h
 
 FORMS += \
         mainwindow.ui

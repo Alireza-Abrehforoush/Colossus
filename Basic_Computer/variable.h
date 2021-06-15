@@ -13,7 +13,7 @@ private:
     bool syntax_valid;
 public:
     explicit Variable(const QString& line, QObject *parent = nullptr);
-
+    bool getSyntaxValid();
 signals:
 
 };

@@ -7,6 +7,7 @@
 #include "instructions.h"
 #include "variable.h"
 #include "assembe.h"
+#include "parser.h"
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
     if (object==this->ui->text_edit && event->type()==QEvent::KeyPress)
@@ -25,12 +26,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
 
 
-//                QPoint p(this->text_edit_custom_menu->pos()+this->ui->text_edit->pos()+this->ui->centralWidget->pos()+this->pos());
-//                qDebug()<<this->text_edit_custom_menu->pos().x()<<"\t"<<text_edit_custom_menu->pos().y()<<"\n";
-//                p.setX(p.x()+40);
-//                p.setY(p.y()+55);
-//                this->text_edit_custom_menu->cursor().setPos(p);
-//                this->text_edit_custom_menu->cursor().setShape(Qt::CursorShape::ArrowCursor);
                 if(this->current_member_index<this->auto_complete_members.size()-1)
                 {
                     this->current_member_index++;
@@ -46,6 +41,11 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
         else if(e->key()==up_key_code)//up key pressed
         {
+            QAction* act=this->text_edit_custom_menu->activeAction();
+            if(act==nullptr)
+            {
+                return QMainWindow::eventFilter(object,event);
+            }
             if(this->auto_complete_members.empty()==false)
             {
                 if(this->current_member_index>0)
@@ -59,7 +59,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
         }
         else if(e->key()==tab_key_code || e->key()==enter_key_code)
         {
-            this->setWindowTitle("Tab");
+
             QAction* active_act=this->text_edit_custom_menu->activeAction();
             if(active_act)
 
@@ -79,8 +79,11 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
 void MainWindow::updateAutoCompleteMembers()
 {
+
     this->auto_complete_members.clear();
      text_edit_custom_menu->clear();
+     if (current_word=="")
+         return;
     QVector<QString>temp=instructions::mem_ref_vec+instructions::reg_ref_vec;
     for (int i=0;i<temp.size();i++)
     {
@@ -169,7 +172,7 @@ QVector<QString> MainWindow::detectVariable(const QString &text)
 void MainWindow::text_edit_correct_color()
 {
 
-    static bool is_run=false;
+
     if (is_run)
         return;
 //    bool checked_befor=false;
@@ -256,6 +259,54 @@ void MainWindow::text_edit_correct_color()
       is_run=false;
 }
 
+void MainWindow::text_edit_check_syntax()
+{
+    if (is_run==true)
+        return;
+    QTextCursor c=ui->text_edit->textCursor();
+    c.select(c.LineUnderCursor);
+    QString line=c.selectedText();
+
+    Parser p(line);
+    if (line.indexOf(",")>=0)
+    {
+        is_run=true;
+        c.removeSelectedText();
+        Variable v(line);
+        if(v.getSyntaxValid()==false)
+        {
+            ui->text_edit->setFontUnderline(true);
+        }
+        else {
+            ui->text_edit->setFontUnderline(false);
+        }
+            QVector<QString> main_part=p.GetMainPart();
+            QVector<QString>ignored_part=p.GetIgnoredPart();
+            int cnt=0;
+            for(;cnt<main_part.size();cnt++)
+            {
+                ui->text_edit->insertPlainText(ignored_part[cnt]);
+
+                if (instructions::instruction_kind(main_part[cnt])==instructions::mem_ref)
+                {
+                    this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
+
+                }
+                else if(instructions::instruction_kind(main_part[cnt])==instructions::reg_ref)
+                {
+                    this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
+                }
+                ui->text_edit->insertPlainText(main_part[cnt]);
+                ui->text_edit->setTextColor(QColor(255,255,255));
+
+
+         }
+            ui->text_edit->insertPlainText(ignored_part[cnt]);
+            ui->text_edit->setFontUnderline(false);
+            is_run=false;
+    }
+}
+
 void MainWindow::text_edit_update_autocomplete()
 {
     this->current_member_index=-1;
@@ -310,6 +361,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->text_edit->insertPlainText("ORG 100\n");
     connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_correct_color()));
     connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_update_autocomplete()));
+    connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_check_syntax()));
     connect(this->ui->actionAssemble_all_2, SIGNAL(triggered()), this, SLOT(assemble_triggered()));
 
 }

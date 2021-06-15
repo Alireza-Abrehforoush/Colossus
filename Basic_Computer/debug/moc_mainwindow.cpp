@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[7];
-    char stringdata0[116];
+    QByteArrayData data[8];
+    char stringdata0[139];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,13 +34,15 @@ static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 23), // "text_edit_correct_color"
 QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 29), // "text_edit_update_autocomplete"
-QT_MOC_LITERAL(4, 66, 22), // "auto_complete_selected"
-QT_MOC_LITERAL(5, 89, 7), // "content"
-QT_MOC_LITERAL(6, 97, 18) // "assemble_triggered"
+QT_MOC_LITERAL(3, 36, 22), // "text_edit_check_syntax"
+QT_MOC_LITERAL(4, 59, 29), // "text_edit_update_autocomplete"
+QT_MOC_LITERAL(5, 89, 22), // "auto_complete_selected"
+QT_MOC_LITERAL(6, 112, 7), // "content"
+QT_MOC_LITERAL(7, 120, 18) // "assemble_triggered"
 
     },
     "MainWindow\0text_edit_correct_color\0\0"
+    "text_edit_check_syntax\0"
     "text_edit_update_autocomplete\0"
     "auto_complete_selected\0content\0"
     "assemble_triggered"
@@ -53,7 +55,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,15 +63,17 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    1,   36,    2, 0x08 /* Private */,
-       6,    0,   39,    2, 0x08 /* Private */,
+       1,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   40,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    1,   42,    2, 0x08 /* Private */,
+       7,    0,   45,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void,
 
        0        // eod
@@ -82,9 +86,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->text_edit_correct_color(); break;
-        case 1: _t->text_edit_update_autocomplete(); break;
-        case 2: _t->auto_complete_selected((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->assemble_triggered(); break;
+        case 1: _t->text_edit_check_syntax(); break;
+        case 2: _t->text_edit_update_autocomplete(); break;
+        case 3: _t->auto_complete_selected((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: _t->assemble_triggered(); break;
         default: ;
         }
     }
@@ -119,13 +124,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

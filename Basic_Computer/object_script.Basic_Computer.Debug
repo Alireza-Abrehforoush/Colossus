@@ -7,6 +7,7 @@ debug/register.o
 debug/styles.o
 debug/autocompleteaction.o
 debug/variable.o
+debug/parser.o
 debug/moc_flag.o
 debug/moc_mainwindow.o
 debug/moc_memory.o

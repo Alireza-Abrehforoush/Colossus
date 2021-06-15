@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     QVector<QAction*> auto_complete_members;
     int current_member_index=-1;
+    bool is_run=false;
     QMenu * text_edit_custom_menu=nullptr;
     QString current_word="";
     bool eventFilter(QObject *object, QEvent *event);
@@ -24,6 +25,7 @@ class MainWindow : public QMainWindow
 
 private slots:
     void text_edit_correct_color();
+    void text_edit_check_syntax();
     void text_edit_update_autocomplete();
     void auto_complete_selected(const QString& content);
     void assemble_triggered();
