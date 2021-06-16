@@ -24,15 +24,6 @@ signals:
     void valueChanged();
 
 };
-//SC(4),
-//PC(12),
-//AR,
-//IR,
-//DR,
-//AC,
-//TR,
-//INPR(8),
-//OUTR(8),
-//MAR(12);
+
 
 #endif

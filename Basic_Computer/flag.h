@@ -19,13 +19,7 @@ signals:
 
 //namespace Flags
 //{
-//    Flag I;
-//    Flag S;
-//    Flag E;
-//    Flag R;
-//    Flag IEN;
-//    Flag FGI;
-//    Flag FGO;
+
 
 //}
 

@@ -15,7 +15,6 @@ public:
     long long int read(int address);
 signals:
     void valueChanged(int address);
-}
-RAM;
+};
 
 #endif

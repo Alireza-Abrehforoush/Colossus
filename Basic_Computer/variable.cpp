@@ -1,6 +1,6 @@
 #include "variable.h"
 #include "parser.h"
-#include "memory.h"
+#include "Hardware.h"
 
 int Variable::getAddress()
 {
@@ -36,11 +36,11 @@ Variable::Variable(const QString& line, int address, long long int line_no, QObj
     this->name=main_part[0];
     if(main_part[1]=="DEC")
     {
-        RAM.write(this->address, temp_value.toLongLong());
+        hardware::RAM.write(this->address, temp_value.toLongLong());
     }
     else if(main_part[1]=="HEX")
     {
-        RAM.write(this->address, temp_value.toLongLong(nullptr,16));
+        hardware::RAM.write(this->address, temp_value.toLongLong(nullptr,16));
     }
     else
     {

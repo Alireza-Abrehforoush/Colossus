@@ -31,6 +31,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     memory.cpp \
+    ramwindow.cpp \
     register.cpp \
     styles.cpp \
     autocompleteaction.cpp \
@@ -38,11 +39,13 @@ SOURCES += \
     parser.cpp
 
 HEADERS += \
+    Hardware.h \
     assembe.h \
     flag.h \
     instruction.h \
         mainwindow.h \
     memory.h \
+    ramwindow.h \
     register.h \
     style.h \
     instructions.h \
@@ -51,7 +54,8 @@ HEADERS += \
     parser.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        ramwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
