@@ -14,7 +14,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     {
         QKeyEvent *e = static_cast < QKeyEvent * >(event);
         int t=e->key();
-        //qDebug()<<t<<"\n";
         int down_key_code=16777237;
         int up_key_code=16777235;
         int tab_key_code=16777217;
@@ -169,74 +168,32 @@ QVector<QString> MainWindow::detectVariable(const QString &text)
     return instructions;
 }
 
+void MainWindow::setTextEditColor(int instruction)
+{
+    if (instructions::instruction_kind(this->current_word)==instructions::mem_ref)
+    {
+        this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
+    }
+    else if(instructions::instruction_kind(this->current_word)==instructions::reg_ref)
+    {
+        this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
+    }
+    else if(instructions::instruction_kind(this->current_word)==instructions::io_ref)
+    {
+        this->ui->text_edit->setTextColor(styles::io_ref_color[styles::mode]);
+    }
+    else if(instructions::instruction_kind(this->current_word)==instructions::directives)
+    {
+        this->ui->text_edit->setTextColor(styles::directives_color[styles::mode]);
+    }
+}
+
 void MainWindow::text_edit_correct_color()
 {
 
 
     if (is_run)
         return;
-//    bool checked_befor=false;
-//    //static int befor_pos=ui->text_edit->textCursor().position();
-//    if (is_run)
-//        return;
-//    QTextCursor c=ui->text_edit->textCursor();
-//    QTextCursor d=ui->text_edit->textCursor();
-//    d.select(d.WordUnderCursor);
-//    qDebug()<<d.selectedText()<<"\n";
-//    c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
-//    //int cur_pos=c.position();
-//    QString temp=c.selectedText();
-//    QChar new_line(8233);
-
-//    if (temp==" " || temp==new_line|| temp==",")
-//    {
-//        current_word.clear();
-//        int cnt=0;
-//        for(;;cnt++)
-//        {
-//            c.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,1);
-//             temp=c.selectedText();
-////             if(c.position()==befor_pos)
-////                 checked_befor=true;
-//             QChar ch=temp[0];
-//            if(temp[0]==' '|| temp[0]==new_line|| temp[0]==',' || c.atStart())
-//                break;
-//        }
-//        is_run=true;
-//        c.removeSelectedText();
-//        QString temp2="";
-//        QString first="";
-//        first.append(temp[0]);
-//        this->ui->text_edit->insertPlainText(first);
-//        for(int i=1;i<temp.size()-1;i++)
-//            temp2.append(temp[i]);
-//        if(instructions::instruction_kind(temp2)==instructions::mem_ref)
-//            this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
-//        else if (instructions::instruction_kind(temp2)==instructions::reg_ref)
-//            this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
-//        else {
-//            this->ui->text_edit->setTextColor(QColor(255,255,255));
-//        }
-//        this->ui->text_edit->insertPlainText(temp2);
-//        this->ui->text_edit->setTextColor(QColor(255,255,255));
-//        QString end="";
-//        end.append(temp[temp.size()-1]);
-//        this->ui->text_edit->insertPlainText(end);
-//        QString contain=ui->text_edit->toPlainText();
-//        temp="";
-//        if (checked_befor==false)
-//        {
-//           // this->text_edit_correct_color(befor_pos,this->ui->text_edit->textCursor().position());
-//        }
-//        is_run=false;
-//        //befor_pos=cur_pos;
-
-//    }
-//    else
-//    {
-//        current_word=current_word+temp;
-//    }
-
       QTextCursor c=ui->text_edit->textCursor();
       c.select(c.WordUnderCursor);
       is_run=true;
@@ -244,16 +201,7 @@ void MainWindow::text_edit_correct_color()
        this->current_word=c.selectedText();
       c.removeSelectedText();
       qDebug()<<this->current_word<<"\n";
-      if (instructions::instruction_kind(this->current_word)==instructions::mem_ref)
-      {
-          this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
-
-      }
-      else if(instructions::instruction_kind(this->current_word)==instructions::reg_ref)
-      {
-          this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
-      }
-
+      this->setTextEditColor(instructions::instruction_kind(current_word));
       this->ui->text_edit->insertPlainText(this->current_word);
       this->ui->text_edit->setTextColor(QColor(255,255,255));
       is_run=false;
@@ -286,20 +234,9 @@ void MainWindow::text_edit_check_syntax()
             for(;cnt<main_part.size();cnt++)
             {
                 ui->text_edit->insertPlainText(ignored_part[cnt]);
-
-                if (instructions::instruction_kind(main_part[cnt])==instructions::mem_ref)
-                {
-                    this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
-
-                }
-                else if(instructions::instruction_kind(main_part[cnt])==instructions::reg_ref)
-                {
-                    this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
-                }
+                this->setTextEditColor(instructions::instruction_kind(main_part[cnt]));
                 ui->text_edit->insertPlainText(main_part[cnt]);
                 ui->text_edit->setTextColor(QColor(255,255,255));
-
-
          }
             ui->text_edit->insertPlainText(ignored_part[cnt]);
             ui->text_edit->setFontUnderline(false);

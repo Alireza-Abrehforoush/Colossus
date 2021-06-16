@@ -22,7 +22,7 @@ class MainWindow : public QMainWindow
     void text_edit_correct_color(int begin_pos,int end_pos);
     QString ignoreComments(const QString& text);
     QVector<QString> detectVariable(const QString& text);
-
+    void setTextEditColor(int instruction);
 private slots:
     void text_edit_correct_color();
     void text_edit_check_syntax();
@@ -39,4 +39,4 @@ private:
     Ui::MainWindow *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif

@@ -14,7 +14,7 @@ Variable::Variable(const QString& line, QObject *parent) : QObject(parent)
         this->syntax_valid=false;
         return;
     }
-    if(ignored_part[3].indexOf(",")>=0)
+    if(ignored_part[3].indexOf(',') >= 0 || ignored_part[0].indexOf(',') < 0)
     {
         this->syntax_valid=false;
         return;

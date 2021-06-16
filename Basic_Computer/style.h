@@ -1,5 +1,5 @@
-#ifndef STYLE_H
-#define STYLE_H
+#ifndef STYLE_JFNKDSJCNUUENCKJSBJBJD
+#define STYLE_JFNKDSJCNUUENCKJSBJBJD
 #include <QString>
 #include <QColor>
 #include <QVector>
@@ -18,6 +18,8 @@ namespace styles
     QString bg_styles[4]={"background-color: rgb(30, 30, 30);\ncolor: rgb(255, 255, 255);\n"+fonts::font_style+";","background-color: rgb(250, 250, 250);\ncolor: rgb(0, 0, 0);\n"+fonts::font_style+";"};
     QColor mem_ref_color[4]={QColor(0,190,190)};
     QColor reg_ref_color[4]={QColor(0,235,0)};
+    QColor io_ref_color[4] = {QColor(235,0,0)};
+    QColor directives_color[4] = {QColor(0, 0, 235)};
 }
 
-#endif // STYLE_H
+#endif
