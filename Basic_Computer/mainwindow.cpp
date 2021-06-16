@@ -158,7 +158,7 @@ QVector<QString> MainWindow::detectVariable(const QString &text)
     {
         if(total[i].indexOf(',') >= 0)
         {
-            AssemblyVariable::Variables_list.push_back(new Variable(total[i], this));
+            AssemblyVariable::Variables_list.push_back(new Variable(total[i], 0, 0, this));
         }
         else
         {
@@ -214,18 +214,18 @@ void MainWindow::text_edit_check_syntax()
     QTextCursor c=ui->text_edit->textCursor();
     c.select(c.LineUnderCursor);
     QString line=c.selectedText();
-
     Parser p(line);
     if (line.indexOf(",")>=0)
     {
         is_run=true;
         c.removeSelectedText();
-        Variable v(line);
-        if(v.getSyntaxValid()==false)
+
+        if(Variable::checkSyntaxValid(line) == false)
         {
             ui->text_edit->setFontUnderline(true);
         }
-        else {
+        else
+        {
             ui->text_edit->setFontUnderline(false);
         }
             QVector<QString> main_part=p.GetMainPart();
