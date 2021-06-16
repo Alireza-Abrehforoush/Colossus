@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
     flag.cpp \
     instruction.cpp \
+    instructions.cpp \
         main.cpp \
         mainwindow.cpp \
     memory.cpp \

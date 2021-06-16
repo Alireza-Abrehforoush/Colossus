@@ -117,7 +117,7 @@ QString MainWindow::ignoreComments(const QString &raw_text)
     bool comment_began = false;
     for(long long int i = 0; i < raw_text.size(); i++)
     {
-        
+
         if(raw_text.at(i) == '/')
         {
             if(i == raw_text.size() - 1)
@@ -170,19 +170,19 @@ QVector<QString> MainWindow::detectVariable(const QString &text)
 
 void MainWindow::setTextEditColor(int instruction)
 {
-    if (instructions::instruction_kind(this->current_word)==instructions::mem_ref)
+    if (instruction == instructions::mem_ref)
     {
         this->ui->text_edit->setTextColor(styles::mem_ref_color[styles::mode]);
     }
-    else if(instructions::instruction_kind(this->current_word)==instructions::reg_ref)
+    else if(instruction == instructions::reg_ref)
     {
         this->ui->text_edit->setTextColor(styles::reg_ref_color[styles::mode]);
     }
-    else if(instructions::instruction_kind(this->current_word)==instructions::io_ref)
+    else if(instruction == instructions::io_ref)
     {
         this->ui->text_edit->setTextColor(styles::io_ref_color[styles::mode]);
     }
-    else if(instructions::instruction_kind(this->current_word)==instructions::directives)
+    else if(instruction == instructions::directives)
     {
         this->ui->text_edit->setTextColor(styles::directives_color[styles::mode]);
     }

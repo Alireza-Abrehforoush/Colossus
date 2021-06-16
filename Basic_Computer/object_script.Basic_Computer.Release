@@ -1,5 +1,6 @@
 release/flag.o
 release/instruction.o
+release/instructions.o
 release/main.o
 release/mainwindow.o
 release/memory.o
