@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ramwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.14.2
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -59,7 +59,7 @@ public:
 
     void retranslateUi(QMainWindow *RamWindow)
     {
-        RamWindow->setWindowTitle(QCoreApplication::translate("RamWindow", "MainWindow", nullptr));
+        RamWindow->setWindowTitle(QApplication::translate("RamWindow", "MainWindow", nullptr));
     } // retranslateUi
 
 };

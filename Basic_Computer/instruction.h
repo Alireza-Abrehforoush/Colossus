@@ -13,10 +13,14 @@ private:
     long long int line_no;
     int address;
     bool syntax_valid;
+    QString error_content;
     bool direct;
 
 public:
     Instruction(const QString& line, long long int line_no = 0, int address = 0);
+    bool getSyntaxValid();
+    int getType();
+    QString getVar();
 };
 
 #endif

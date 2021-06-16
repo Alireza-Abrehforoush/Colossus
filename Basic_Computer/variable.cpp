@@ -2,6 +2,7 @@
 #include "parser.h"
 #include "Hardware.h"
 
+QVector<QString> Variable::var_pre_assemble;
 int Variable::getAddress()
 {
     return this->address;
