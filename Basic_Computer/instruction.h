@@ -14,8 +14,9 @@ private:
     int address;
     bool syntax_valid;
     QString error_content;
-    bool direct;
+    bool indirect = false;
 
+    static void getDirectAddress();
     static void fetch();
     static void decode();
 public:
@@ -24,6 +25,7 @@ public:
     QString getName();
     int getType();
     QString getVar();
+    void execute();
 };
 
 #endif

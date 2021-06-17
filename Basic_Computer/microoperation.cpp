@@ -18,7 +18,6 @@ Microoperation::Microoperation(const QString &nick_text, const QString& text)
     {
         if(exists(nick_text))
         {
-            //this->text = micops[nick_text].getText();
             auto it = micops.find(nick_text);
             this->text = (*it).getText();
         }
@@ -58,6 +57,14 @@ void Microoperation::run()
     {
         Register::copy(hardware::IR, 15, hardware::I);
     }
+    else if(this->nick_text == "MARTOAR")
+    {
+        hardware::AR.load(hardware::RAM.read(hardware::AR.output()));
+    }
+    else if(this->nick_text == "CMA")
+    {
+        hardware::AC.onesComplement();
+    }
 
     values::current_microoperation_text.setValue(text);
 }
@@ -70,6 +77,8 @@ void Microoperation::setupMicrooperation()
     micops.insert("MARTOIR", Microoperation("MARTOIR", "IR <- M[AR]"));
     micops.insert("IRTOAR", Microoperation("IRTOAR", "AR <- IR[0:11]"));
     micops.insert("IRTOI", Microoperation("IRTOI", "I <- IR[15]"));
+    micops.insert("MARTOAR", Microoperation("MARTOAR", "AR <- M[AR]"));
+    micops.insert("CMA", Microoperation("CMA", "CMA <= ~CMA"));
     //micops.insert("PCTOAR", Microoperation("PCTOAR", "AR <- PC"));
 
 }

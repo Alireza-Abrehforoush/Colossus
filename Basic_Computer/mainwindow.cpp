@@ -367,6 +367,8 @@ void MainWindow::assemble_triggered()
     this->ram_window->show();
     this->setupVariableTable();
     connect(this->ram_window, SIGNAL(closed()), this, SLOT(deleteRamWindow()));
+    Instruction cma("CMA", 2, 258);
+    cma.execute();
 }
 
 void MainWindow::deleteRamWindow()

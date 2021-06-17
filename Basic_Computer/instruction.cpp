@@ -2,6 +2,7 @@
 #include "instructions.h"
 #include "parser.h"
 #include "microoperation.h"
+#include "Hardware.h"
 
 Instruction::Instruction(const QString &line, long long line_no, int address)
 {
@@ -46,6 +47,10 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
         }
         else
         {
+            if(part_number == 3)
+            {
+                this->indirect = true;
+            }
             this->var=main_part[1];
         }
     }
@@ -102,6 +107,44 @@ int Instruction::getType()
 QString Instruction::getVar()
 {
     return this->var;
+}
+
+void Instruction::execute()
+{
+    if(this->syntax_valid == false)
+    {
+        return;
+    }
+    else
+    {
+        this->fetch();
+        this->decode();
+        if(this->getType() == instructions::mem_ref)
+        {
+            if(this->indirect == true)
+            {
+                this->getDirectAddress();
+            }
+            else
+            {
+                ////////////////////////////
+            }
+        }
+        else
+        {
+            if(this->name == "CMA")
+            {
+                Microoperation cma("CMA");
+                cma.run();////////////
+            }
+        }
+    }
+}
+
+void Instruction::getDirectAddress()
+{
+    Microoperation temp("MARTOAR");
+    temp.run();
 }
 
 void Instruction::fetch()

@@ -1,7 +1,7 @@
 #include "ramwindow.h"
 #include "ui_ramwindow.h"
 #include "Hardware.h"
-
+#include "values.h"
 void RamWindow::closeEvent(QCloseEvent *event)
 {
     emit this->closed();
@@ -20,6 +20,9 @@ RamWindow::RamWindow(QWidget *parent) :
     setFixedSize(1080, 600);
 
     //
+    ui->microoperation_line_edit->setReadOnly(true);
+    ui->microoperation_line_edit->setAlignment(Qt::AlignCenter);
+    //
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setRowCount(4096);
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Label"));
@@ -37,7 +40,7 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
-
+    connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(this->updateMicrooperationText(const QString&)));
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)
@@ -61,5 +64,6 @@ void RamWindow::updateRam(int address)
 
 void RamWindow::updateMicrooperationText(const QString &text)
 {
-
+    ui->microoperation_line_edit->setText(text);
+    return;
 }

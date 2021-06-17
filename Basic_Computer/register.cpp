@@ -90,6 +90,15 @@ QString Register::toHex()
     return QString::number(res,16);
 }
 
+void Register::onesComplement()
+{
+    for(int i = 0; i < this->size; i++)
+    {
+        this->value[i] = !(this->value[i]);
+    }
+    return;
+}
+
 void Register::copy(Register &from, int i0, int j0, Register &to, int i1, int j1)
 {
     if(j1 - i1 != j0 - i0)

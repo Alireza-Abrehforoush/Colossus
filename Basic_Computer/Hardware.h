@@ -17,7 +17,6 @@ namespace hardware
     extern Register TR;
     extern Register INPR;
     extern Register OUTR;
-    extern Register MAR;
     extern Flag I;
     extern Flag S;
     extern Flag E;

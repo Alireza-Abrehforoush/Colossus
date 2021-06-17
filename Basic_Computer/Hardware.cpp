@@ -5,14 +5,13 @@ namespace hardware
     Memory RAM;
     Register SC(4);
     Register PC(12);
-    Register AR;
+    Register AR(12);
     Register IR;
     Register DR;
     Register AC;
     Register TR;
     Register INPR(8);
     Register OUTR(8);
-    Register MAR(12);
     Flag I;
     Flag S;
     Flag E;

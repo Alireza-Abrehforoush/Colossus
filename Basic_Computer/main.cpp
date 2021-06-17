@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ramwindow.h"
 #include "Hardware.h"
+#include "instruction.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
