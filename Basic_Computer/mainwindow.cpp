@@ -6,6 +6,7 @@
 #include "QKeyEvent"
 #include "instructions.h"
 #include "variable.h"
+#include "instruction.h"
 #include "assembe.h"
 #include "parser.h"
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
@@ -83,7 +84,7 @@ void MainWindow::updateAutoCompleteMembers()
      text_edit_custom_menu->clear();
      if (current_word=="")
          return;
-    QVector<QString>temp=instructions::mem_ref_vec+instructions::reg_ref_vec;
+    QVector<QString>temp=Variable::var_pre_assemble+instructions::mem_ref_vec+instructions::reg_ref_vec+instructions::io_ref_vec+instructions::directives_vec;
     for (int i=0;i<temp.size();i++)
     {
         if (temp[i].startsWith(current_word))
@@ -215,7 +216,13 @@ void MainWindow::text_edit_check_syntax()
     c.select(c.LineUnderCursor);
     QString line=c.selectedText();
     Parser p(line);
-    if (line.indexOf(",")>=0)
+    QVector<QString> main_part=p.GetMainPart();
+    QVector<QString>ignored_part=p.GetIgnoredPart();
+    if(main_part.size()==0)
+    {
+        return;
+    }
+    else if (line.indexOf(",")>=0)
     {
         is_run=true;
         c.removeSelectedText();
@@ -228,8 +235,7 @@ void MainWindow::text_edit_check_syntax()
         {
             ui->text_edit->setFontUnderline(false);
         }
-            QVector<QString> main_part=p.GetMainPart();
-            QVector<QString>ignored_part=p.GetIgnoredPart();
+
             int cnt=0;
             for(;cnt<main_part.size();cnt++)
             {
@@ -241,6 +247,40 @@ void MainWindow::text_edit_check_syntax()
             ui->text_edit->insertPlainText(ignored_part[cnt]);
             ui->text_edit->setFontUnderline(false);
             is_run=false;
+    }
+    else// it is instruction
+    {
+        Instruction ins(line);
+        is_run=true;
+        c.removeSelectedText();
+        if (ins.getSyntaxValid()==false)
+        {
+            ui->text_edit->setFontUnderline(true);
+        }
+        else
+        {
+             ui->text_edit->setFontUnderline(false);
+             if (ins.getType()==instructions::mem_ref)
+             {
+                 QString var=ins.getVar();
+                 if(Variable::var_pre_assemble.indexOf(var)<0)
+                 {
+                     Variable::var_pre_assemble.push_back(var);
+                 }
+             }
+        }
+        int cnt=0;
+        for(;cnt<main_part.size();cnt++)
+        {
+            ui->text_edit->insertPlainText(ignored_part[cnt]);
+            this->setTextEditColor(instructions::instruction_kind(main_part[cnt]));
+            ui->text_edit->insertPlainText(main_part[cnt]);
+            ui->text_edit->setTextColor(QColor(255,255,255));
+        }
+        ui->text_edit->insertPlainText(ignored_part[cnt]);
+        ui->text_edit->setFontUnderline(false);
+        is_run=false;
+
     }
 }
 

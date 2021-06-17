@@ -29,19 +29,71 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
             this->syntax_valid = false;
             return;
         }
+
     }
     else if(this->type == instructions::mem_ref)
     {
-        if(part_number > 3)
+        if(part_number > 3 || part_number<=1)
         {
             this->syntax_valid = false;
             return;
         }
-        if(part_number == 3 && main_part[3] != "I")
+        else if(part_number == 3 && main_part[3] != "I")
+        {
+            this->syntax_valid = false;
+            return;
+        }
+        else
+        {
+            this->var=main_part[1];
+        }
+    }
+    else if(this->type == instructions::directives)
+    {
+        if (part_number>2)
+        {
+            this->syntax_valid = false;
+            return;
+        }
+        if (main_part[0]=="ORG")
+        {
+            if(part_number!=2)
+            {
+                this->syntax_valid = false;
+                return;
+            }
+            for(int i=0;i<main_part[1].size();i++)
+            {
+                if (main_part[1][i].isDigit()==false)
+                {
+                    this->syntax_valid = false;
+                    return;
+                }
+            }
+            this->var=main_part[1];
+        }
+        else if(main_part[0]=="DEC"|| main_part[0]=="HEX")
         {
             this->syntax_valid = false;
             return;
         }
     }
 
+    this->name=main_part[0];
+    this->syntax_valid=true;
+}
+
+bool Instruction::getSyntaxValid()
+{
+    return this->syntax_valid;
+}
+
+int Instruction::getType()
+{
+    return this->type;
+}
+
+QString Instruction::getVar()
+{
+    return this->var;
 }

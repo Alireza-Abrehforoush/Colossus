@@ -16,6 +16,7 @@ public:
     explicit Variable(const QString& line, int address = 0, long long int line_no = 0, QObject *parent = nullptr);
     bool getSyntaxValid();
     static bool checkSyntaxValid(const QString& line);
+    static QVector<QString> var_pre_assemble;
 signals:
 
 };
