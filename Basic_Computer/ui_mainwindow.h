@@ -12,10 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -29,6 +31,7 @@ public:
     QAction *actionAssemble_all_2;
     QWidget *centralWidget;
     QTextEdit *text_edit;
+    QTableWidget *variable_table;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -41,7 +44,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1286, 639);
+        MainWindow->resize(1500, 700);
         MainWindow->setStyleSheet(QString::fromUtf8(""));
         actionAssemble_all = new QAction(MainWindow);
         actionAssemble_all->setObjectName(QString::fromUtf8("actionAssemble_all"));
@@ -51,11 +54,14 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         text_edit = new QTextEdit(centralWidget);
         text_edit->setObjectName(QString::fromUtf8("text_edit"));
-        text_edit->setGeometry(QRect(170, 0, 1101, 571));
+        text_edit->setGeometry(QRect(10, 0, 1071, 551));
+        variable_table = new QTableWidget(centralWidget);
+        variable_table->setObjectName(QString::fromUtf8("variable_table"));
+        variable_table->setGeometry(QRect(1100, 0, 341, 551));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1286, 26));
+        menuBar->setGeometry(QRect(0, 0, 1500, 26));
         menuBar->setStyleSheet(QString::fromUtf8("background-color: rgb(30, 30, 30);\n"
 "\n"
 "color: rgb(255, 255, 255);"));

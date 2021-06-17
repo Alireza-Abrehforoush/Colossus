@@ -19,8 +19,11 @@ private:
 public:
     Instruction(const QString& line, long long int line_no = 0, int address = 0);
     bool getSyntaxValid();
+    QString getName();
     int getType();
     QString getVar();
+    static void fetch();
+    static void decode();
 };
 
 #endif

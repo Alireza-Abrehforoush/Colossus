@@ -31,3 +31,10 @@ QVector<QString> Parser::GetIgnoredPart()
 {
     return this->ignored_part;
 }
+
+bool Parser::isEmptyLine(const QString &line)
+{
+    Parser temp(line);
+    QVector<QString> main_part = temp.GetMainPart();
+    return main_part.size() == 0;
+}

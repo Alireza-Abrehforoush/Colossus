@@ -88,6 +88,11 @@ bool Instruction::getSyntaxValid()
     return this->syntax_valid;
 }
 
+QString Instruction::getName()
+{
+    return this->name;
+}
+
 int Instruction::getType()
 {
     return this->type;
@@ -96,4 +101,9 @@ int Instruction::getType()
 QString Instruction::getVar()
 {
     return this->var;
+}
+
+void Instruction::fetch()
+{
+
 }

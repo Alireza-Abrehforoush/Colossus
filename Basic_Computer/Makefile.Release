@@ -341,6 +341,7 @@ release/moc_mainwindow.cpp: mainwindow.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QACtion \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qaction.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qactiongroup.h \
+		ramwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/bin/moc.exe
 	C:\Qt\Qt5.14.2\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include C:/Users/Alireza/Desktop/Programming/Colossus/Basic_Computer/release/moc_predefs.h -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/mkspecs/win32-g++ -IC:/Users/Alireza/Desktop/Programming/Colossus/Basic_Computer -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/include -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtANGLE -IC:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore -IC:/Qt/Qt5.12.1/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Qt5.12.1/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Qt5.12.1/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Qt5.12.1/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Qt5.12.1/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Qt5.12.1/Tools/mingw730_64/x86_64-w64-mingw32/include mainwindow.h -o release\moc_mainwindow.cpp
@@ -1192,13 +1193,16 @@ release/mainwindow.o: mainwindow.cpp C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/Qt
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qcontiguouscache.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qsharedpointer.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qsharedpointer_impl.h \
-		mainwindow.h \
-		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QMainWindow \
-		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qtguiglobal.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qtgui-config.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qwindowdefs.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qwindowdefs_win.h \
@@ -1234,8 +1238,23 @@ release/mainwindow.o: mainwindow.cpp C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/Qt
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qvector2d.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qstyleoption.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qvalidator.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/qregularexpression.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qicon.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qslider.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qabstractslider.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qstyle.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qrubberband.h \
+		mainwindow.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QMainWindow \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qmainwindow.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/QTextCursor \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
@@ -1246,6 +1265,7 @@ release/mainwindow.o: mainwindow.cpp C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/Qt
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/QACtion \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qaction.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtWidgets/qactiongroup.h \
+		ramwindow.h \
 		ui_mainwindow.h \
 		style.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/QtCore/QString \
@@ -1256,7 +1276,11 @@ release/mainwindow.o: mainwindow.cpp C:/Qt/Qt5.14.2/5.14.2/mingw73_32/include/Qt
 		variable.h \
 		instruction.h \
 		assembe.h \
-		parser.h
+		parser.h \
+		Hardware.h \
+		memory.h \
+		register.h \
+		flag.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o mainwindow.cpp
 
 release/memory.o: memory.cpp memory.h \

@@ -16,3 +16,12 @@ long long Memory::read(int address)
 {
     return this->array[address].output();
 }
+
+void Memory::clearAll()
+{
+    for(int i = 0; i < 4096; i++)
+    {
+        this->write(i, 0);
+    }
+    return;
+}

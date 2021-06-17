@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QTableWidget>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "style.h"
@@ -9,6 +10,7 @@
 #include "instruction.h"
 #include "assembe.h"
 #include "parser.h"
+#include "Hardware.h"
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
     if (object==this->ui->text_edit && event->type()==QEvent::KeyPress)
@@ -112,58 +114,102 @@ void MainWindow::text_edit_correct_color(int begin_pos, int end_pos)
     //qDebug()<<"space number of it is "<<l.size()<<"\n";
 }
 
-QString MainWindow::ignoreComments(const QString &raw_text)
+QVector<QString> MainWindow::ignoreComments(const QString &raw_text)
 {
-    QString refined_text = "";
+    QVector<QString> plain_text = raw_text.split("\n").toVector();
+    QVector<QString> refined_text;
+    refined_text.push_back("");
     bool comment_began = false;
-    for(long long int i = 0; i < raw_text.size(); i++)
+    for(long long int i = 0; i < plain_text.size(); i++)
     {
-
-        if(raw_text.at(i) == '/')
+        QString current_line = "";
+        for(long long int j = 0; j < plain_text[i].size(); j++)
         {
-            if(i == raw_text.size() - 1)
+            if(plain_text[i].at(j) == '/')
             {
-                continue;
-            }
-            else
-            {
-                if(raw_text.at(i + 1) == '/')
+                if(j == plain_text[i].size() - 1)
                 {
-                    i += 2;
-                    while(raw_text.at(i) != '\n')
+                    continue;
+                }
+                else
+                {
+                    if(comment_began)
                     {
-                        i++;
+                        while(j < plain_text[i].size() - 1 && !(plain_text[i].at(j) == '*' && plain_text[i].at(j + 1) == '/'))
+                        {
+                            j++;
+                        }
+                        if(plain_text[i].at(j) == '*')
+                        {
+                            j += 2;
+                            comment_began = false;
+                        }
+                    }
+                    else if(plain_text[i].at(j + 1) == '/')
+                    {
+                        j += 2;
+                        while(j < plain_text[i].size())
+                        {
+                            j++;
+                        }
+                    }
+                    else if(plain_text[i].at(j + 1) == '*')
+                    {
+                        j += 2;
+                        comment_began = true;
+                        while(j < plain_text[i].size() - 1 && !(plain_text[i].at(j) == '*' && plain_text[i].at(j + 1) == '/'))
+                        {
+                            j++;
+                        }
+                        if(plain_text[i].at(j) == '*')
+                        {
+                            j += 2;
+                            comment_began = false;
+                        }
+
                     }
                 }
-                else if(raw_text.at(i + 1) == '*')
-                {
-                    i += 2;
-                    while(i < raw_text.size() - 1 && !(raw_text.at(i) == '*' && raw_text.at(i + 1) == '/'))
-                    {
-                        i++;
-                    }
-                    i += 2;
-                }
             }
+            current_line += plain_text[i].at(j);
         }
-        refined_text.push_back(raw_text.at(i));
+        refined_text.push_back(current_line);
     }
     return refined_text;
 }
 
-QVector<QString> MainWindow::detectVariable(const QString &text)
+QVector<QString> MainWindow::detectVariable(QVector<QString> total)
 {
-    QVector<QString> total = text.split("\n").toVector();
+    int address = 0;
     QVector<QString> instructions;
     for(long long int i = 0; i < total.size(); i++)
     {
         if(total[i].indexOf(',') >= 0)
         {
-            AssemblyVariable::Variables_list.push_back(new Variable(total[i], 0, 0, this));
+            Variable* kemp = new Variable(total[i], address, i, this);
+            if(kemp->getSyntaxValid() == false)
+            {
+                continue;
+            }
+            AssemblyVariable::Variables_list.push_back(kemp);
+            instructions.push_back("");
+            address++;
         }
         else
         {
             instructions.push_back(total[i]);
+            Instruction temp(total[i]);
+            if(temp.getSyntaxValid())
+            {
+                if(temp.getName() == "ORG")
+                {
+                    address = temp.getVar().toInt();
+                    address++;
+                }
+            }
+            if(Parser::isEmptyLine(total[i]) == false)
+            {
+                address++;
+            }
         }
     }
     return instructions;
@@ -260,14 +306,14 @@ void MainWindow::text_edit_check_syntax()
         else
         {
              ui->text_edit->setFontUnderline(false);
-             if (ins.getType()==instructions::mem_ref)
-             {
-                 QString var=ins.getVar();
-                 if(Variable::var_pre_assemble.indexOf(var)<0)
-                 {
-                     Variable::var_pre_assemble.push_back(var);
-                 }
-             }
+//             if (ins.getType()==instructions::mem_ref)
+//             {
+//                 QString var=ins.getVar();
+//                 if(Variable::var_pre_assemble.indexOf(var)<0)
+//                 {
+//                     Variable::var_pre_assemble.push_back(var);
+//                 }
+//             }
         }
         int cnt=0;
         for(;cnt<main_part.size();cnt++)
@@ -311,14 +357,64 @@ void MainWindow::auto_complete_selected(const QString &content)
 
 void MainWindow::assemble_triggered()
 {
-    QString text_without_comment = this->ignoreComments(this->ui->text_edit->toPlainText());
+    if(ram_window != nullptr)
+    {
+        return;
+    }
+    QVector<QString> text_without_comment = this->ignoreComments(this->ui->text_edit->toPlainText());
     QVector<QString> instructions = this->detectVariable(text_without_comment);
+    this->ram_window = new RamWindow();
+    this->ram_window->show();
+    this->setupVariableTable();
+    connect(this->ram_window, SIGNAL(closed()), this, SLOT(deleteRamWindow()));
+}
+
+void MainWindow::deleteRamWindow()
+{
+    delete ram_window;
+    ram_window = nullptr;
+    hardware::RAM.clearAll();
+    this->clearVariableTable();
+    ui->variable_table->setHidden(true);
+    return;
+}
+
+void MainWindow::setupVariableTable()
+{
+    ui->variable_table->setColumnCount(3);
+    ui->variable_table->setRowCount(AssemblyVariable::Variables_list.size());
+    ui->variable_table->setHorizontalHeaderItem(0, new QTableWidgetItem("Label"));
+    ui->variable_table->setHorizontalHeaderItem(1, new QTableWidgetItem("Decimal Value"));
+    ui->variable_table->setHorizontalHeaderItem(2, new QTableWidgetItem("Hexadecimal Value"));
+    for(int i = 0; i < AssemblyVariable::Variables_list.size(); i++)
+    {
+        this->addItem(i, 0, AssemblyVariable::Variables_list[i]->getName());
+        int address = AssemblyVariable::Variables_list[i]->getAddress();
+        this->addItem(i, 1, QString::number(hardware::RAM.read(address), 10));
+        this->addItem(i, 2, QString::number(hardware::RAM.read(address), 16));
+    }
+    ui->variable_table->setHidden(false);
+}
+
+void MainWindow::addItem(int row, int column, const QString &content)
+{
+    QTableWidgetItem* address = new QTableWidgetItem(content);
+    address->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+    address->setTextAlignment(Qt::AlignCenter);
+    ui->variable_table->setItem(row, column, address);
+}
+
+void MainWindow::clearVariableTable()
+{
+    ui->variable_table->clear();
+    AssemblyVariable::Variables_list.clear();
+    return;
 }
 
 void MainWindow::keyPressedEvent(QKeyEvent *e)
-{   if (e->key()==Qt::DownArrow)
-     this->setWindowTitle("Event");
-
+{
+    if (e->key()==Qt::DownArrow)
+        this->setWindowTitle("Event");
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -329,6 +425,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    ui->variable_table->setHidden(true);
     this->ui->text_edit->setStyleSheet(styles::bg_styles[styles::mode]);
     text_edit_custom_menu->setParent(this->ui->text_edit);
 

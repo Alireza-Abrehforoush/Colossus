@@ -1,5 +1,5 @@
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef PARSER_VNJDNVKDJNVLKJMVL
+#define PARSER_VNJDNVKDJNVLKJMVL
 #include <QVector>
 #include <QString>
 
@@ -11,6 +11,7 @@ public:
     Parser(QString line);
     QVector<QString>GetMainPart();
     QVector<QString>GetIgnoredPart();
+    static bool isEmptyLine(const QString& line);
 };
 
 #endif // PARSER_H

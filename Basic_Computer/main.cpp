@@ -6,11 +6,12 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //MainWindow w;
-    //w.show();
+    MainWindow w;
+    w.show();
     ///////////
-    RamWindow rw;
-    rw.show();
+
+    //RamWindow rw;
+    //rw.show();
     ///////////
     return a.exec();
 }

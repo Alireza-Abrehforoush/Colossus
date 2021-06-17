@@ -10,7 +10,8 @@ class RamWindow;
 class RamWindow : public QMainWindow
 {
     Q_OBJECT
-
+protected:
+    void closeEvent(QCloseEvent *event);
 public:
     explicit RamWindow(QWidget *parent = nullptr);
     void addItem(int row, int column, const QString& content);
@@ -21,6 +22,9 @@ private slots:
 
 private:
     Ui::RamWindow *ui;
+
+signals:
+    void closed();
 };
 
 #endif // RAMWINDOW_H

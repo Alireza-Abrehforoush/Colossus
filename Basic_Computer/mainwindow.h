@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTextCursor>
 #include "autocompleteaction.h"
+#include "ramwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,19 +21,25 @@ class MainWindow : public QMainWindow
     bool eventFilter(QObject *object, QEvent *event);
     void updateAutoCompleteMembers();
     void text_edit_correct_color(int begin_pos,int end_pos);
-    QString ignoreComments(const QString& text);
-    QVector<QString> detectVariable(const QString& text);
+    QVector<QString> ignoreComments(const QString& text);
+    QVector<QString> detectVariable(QVector<QString> total);
     void setTextEditColor(int instruction);
+    RamWindow* ram_window = nullptr;
 private slots:
     void text_edit_correct_color();
     void text_edit_check_syntax();
     void text_edit_update_autocomplete();
     void auto_complete_selected(const QString& content);
     void assemble_triggered();
+    void deleteRamWindow();
+    void setupVariableTable();
+    void addItem(int row, int column, const QString &content);
+    void clearVariableTable();
 protected:
     void keyPressedEvent(QKeyEvent* e);
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private:

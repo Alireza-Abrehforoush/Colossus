@@ -11,6 +11,8 @@ int Variable::getAddress()
 Variable::Variable(const QString& line, int address, long long int line_no, QObject *parent) : QObject(parent)
 {
     QString temp_value = "";
+    this->address = address;
+    this->line_no = line_no;
     Parser p(line);
     QVector<QString> main_part=p.GetMainPart();
     QVector<QString>ignored_part=p.GetIgnoredPart();
@@ -20,7 +22,7 @@ Variable::Variable(const QString& line, int address, long long int line_no, QObj
         this->syntax_valid=false;
         return;
     }
-    if(ignored_part[3].indexOf(',') >= 0 || ignored_part[0].indexOf(',') < 0)
+    if(ignored_part[3].indexOf(',') >= 0 || ignored_part[0].indexOf(',') >= 0 || ignored_part[2].indexOf(',') >= 0)
     {
         this->syntax_valid=false;
         return;
@@ -57,6 +59,11 @@ bool Variable::getSyntaxValid()
     return this->syntax_valid;
 }
 
+QString Variable::getName()
+{
+    return this->name;
+}
+
 bool Variable::checkSyntaxValid(const QString &line)
 {
     QString temp_value = "";
@@ -68,7 +75,7 @@ bool Variable::checkSyntaxValid(const QString &line)
     {
         return false;
     }
-    if(ignored_part[3].indexOf(',') >= 0 || ignored_part[0].indexOf(',') < 0)
+    if(ignored_part[3].indexOf(',') >= 0 || ignored_part[0].indexOf(',') >= 0 || ignored_part[2].indexOf(',') >= 0)
     {
         return false;
     }
