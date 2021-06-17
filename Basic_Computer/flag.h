@@ -14,13 +14,7 @@ public:
     bool getValue();
 
 signals:
-
+    void valueChanged();
 };
-
-//namespace Flags
-//{
-
-
-//}
 
 #endif // FLAG_H

@@ -92,7 +92,7 @@ QString Register::toHex()
 
 void Register::copy(Register &from, int i0, int j0, Register &to, int i1, int j1)
 {
-    if(j1 - i1 != i0 - j0)
+    if(j1 - i1 != j0 - i0)
         return;
     for(int cnt = 0; cnt <= j0 - i0; cnt++)
     {
@@ -100,13 +100,11 @@ void Register::copy(Register &from, int i0, int j0, Register &to, int i1, int j1
     }
     emit to.valueChanged();
 }
-//SC(4),
-//PC(12),
-//AR,
-//IR,
-//DR,
-//AC,
-//TR,
-//INPR(8),
-//OUTR(8),
-//MAR(12);
+
+void Register::copy(Register &from, int i, Flag &to)
+{
+    to.setValue(from.value[i]);
+    emit to.valueChanged();
+    return;
+}
+

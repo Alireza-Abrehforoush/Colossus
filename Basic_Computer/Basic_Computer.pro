@@ -32,6 +32,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     memory.cpp \
+    microoperation.cpp \
     ramwindow.cpp \
     register.cpp \
     styles.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     instruction.h \
         mainwindow.h \
     memory.h \
+    microoperation.h \
     ramwindow.h \
     register.h \
     style.h \

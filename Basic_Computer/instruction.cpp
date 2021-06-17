@@ -1,6 +1,7 @@
 #include "instruction.h"
 #include "instructions.h"
 #include "parser.h"
+#include "microoperation.h"
 
 Instruction::Instruction(const QString &line, long long line_no, int address)
 {
@@ -105,5 +106,15 @@ QString Instruction::getVar()
 
 void Instruction::fetch()
 {
+    Microoperation temp1("PCTOAR"), temp2("INCPC"), temp3("MARTOIR");
+    temp1.run();
+    temp2.run();
+    temp3.run();
+}
 
+void Instruction::decode()
+{
+    Microoperation temp1("IRTOAR"), temp2("IRTOI");
+    temp1.run();
+    temp2.run();
 }
