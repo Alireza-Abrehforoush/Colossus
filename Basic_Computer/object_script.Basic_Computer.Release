@@ -7,8 +7,6 @@ release/main.o
 release/mainwindow.o
 release/memory.o
 release/microoperation.o
-release/microoperation.o
-release/microoperation.o
 release/ramwindow.o
 release/register.o
 release/styles.o

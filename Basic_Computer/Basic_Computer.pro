@@ -34,8 +34,6 @@ SOURCES += \
         mainwindow.cpp \
     memory.cpp \
     microoperation.cpp \
-    microoperation.cpp \
-    microoperation.cpp \
     ramwindow.cpp \
     register.cpp \
     styles.cpp \
@@ -52,8 +50,6 @@ HEADERS += \
     instruction.h \
         mainwindow.h \
     memory.h \
-    microoperation.h \
-    microoperation.h \
     microoperation.h \
     ramwindow.h \
     register.h \

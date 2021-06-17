@@ -7,8 +7,6 @@ debug/main.o
 debug/mainwindow.o
 debug/memory.o
 debug/microoperation.o
-debug/microoperation.o
-debug/microoperation.o
 debug/ramwindow.o
 debug/register.o
 debug/styles.o
