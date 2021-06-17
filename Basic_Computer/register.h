@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QVector>
+#include "flag.h"
+
 class Register : public QObject
 {
     Q_OBJECT
@@ -19,7 +21,8 @@ public:
     long long int output();
     bool at(int index);
     QString toHex();
-    static void copy(Register & from,int i0, int j0, Register & to,int i1,int j1);
+    static void copy(Register & from, int i0, int j0, Register & to,int i1,int j1);
+    static void copy(Register & from, int i, Flag& to);
 signals:
     void valueChanged();
 

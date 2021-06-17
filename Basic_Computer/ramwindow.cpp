@@ -27,6 +27,8 @@ RamWindow::RamWindow(QWidget *parent) :
     ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem("Instruction"));
     ui->tableWidget->setHorizontalHeaderItem(3, new QTableWidgetItem("Hex"));
 
+
+
     for(int i = 0; i < 4096; i++)
     {
         this->addItem(i, 1, QString::number(i, 16));
@@ -35,6 +37,7 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
+
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)
@@ -53,5 +56,10 @@ RamWindow::~RamWindow()
 void RamWindow::updateRam(int address)
 {
     this->addItem(address, 3, QString::number(hardware::RAM.read(address), 16));
+
+}
+
+void RamWindow::updateMicrooperationText(const QString &text)
+{
 
 }

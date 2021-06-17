@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
     Hardware.cpp \
+    capsulatedvalue.cpp \
     flag.cpp \
     instruction.cpp \
     instructions.cpp \
@@ -33,26 +34,33 @@ SOURCES += \
         mainwindow.cpp \
     memory.cpp \
     microoperation.cpp \
+    microoperation.cpp \
+    microoperation.cpp \
     ramwindow.cpp \
     register.cpp \
     styles.cpp \
     autocompleteaction.cpp \
+    values.cpp \
     variable.cpp \
     parser.cpp
 
 HEADERS += \
     Hardware.h \
     assembe.h \
+    capsulatedvalue.h \
     flag.h \
     instruction.h \
         mainwindow.h \
     memory.h \
+    microoperation.h \
+    microoperation.h \
     microoperation.h \
     ramwindow.h \
     register.h \
     style.h \
     instructions.h \
     autocompleteaction.h \
+    values.h \
     variable.h \
     parser.h
 

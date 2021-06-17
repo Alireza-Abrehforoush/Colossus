@@ -1,4 +1,5 @@
 debug/Hardware.o
+debug/capsulatedvalue.o
 debug/flag.o
 debug/instruction.o
 debug/instructions.o
@@ -6,12 +7,16 @@ debug/main.o
 debug/mainwindow.o
 debug/memory.o
 debug/microoperation.o
+debug/microoperation.o
+debug/microoperation.o
 debug/ramwindow.o
 debug/register.o
 debug/styles.o
 debug/autocompleteaction.o
+debug/values.o
 debug/variable.o
 debug/parser.o
+debug/moc_capsulatedvalue.o
 debug/moc_flag.o
 debug/moc_mainwindow.o
 debug/moc_memory.o

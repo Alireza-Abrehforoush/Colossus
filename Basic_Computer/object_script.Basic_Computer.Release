@@ -1,4 +1,5 @@
 release/Hardware.o
+release/capsulatedvalue.o
 release/flag.o
 release/instruction.o
 release/instructions.o
@@ -6,12 +7,16 @@ release/main.o
 release/mainwindow.o
 release/memory.o
 release/microoperation.o
+release/microoperation.o
+release/microoperation.o
 release/ramwindow.o
 release/register.o
 release/styles.o
 release/autocompleteaction.o
+release/values.o
 release/variable.o
 release/parser.o
+release/moc_capsulatedvalue.o
 release/moc_flag.o
 release/moc_mainwindow.o
 release/moc_memory.o

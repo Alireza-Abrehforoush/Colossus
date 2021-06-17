@@ -45,8 +45,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>40</y>
+      <x>90</x>
+      <y>30</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -58,6 +58,24 @@
     </property>
     <property name="text">
      <string>Registers:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>30</y>
+      <width>61</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Flags:</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
@@ -104,7 +122,14 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTableWidget" name="register_table"/>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QTableWidget" name="register_table"/>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="flags_table"/>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QPushButton" name="help">
@@ -146,7 +171,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="input_line_edit">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -194,7 +219,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="microoperation_line_edit"/>
        </item>
       </layout>
      </item>

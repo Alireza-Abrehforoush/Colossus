@@ -19,7 +19,7 @@ public:
 
 private slots:
     void updateRam(int address);
-
+    void updateMicrooperationText(const QString& text);
 private:
     Ui::RamWindow *ui;
 

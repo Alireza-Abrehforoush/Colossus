@@ -1,21 +1,18 @@
-#ifndef MICROOPERATION_H
-#define MICROOPERATION_H
+#ifndef MICROOPERATION_RFHJKMBVYUIO
+#define MICROOPERATION_RFHJKMBVYUIO
 
 #include "QString"
-#include "QMap"
 
 class Microoperation
 {
 private:
     QString text;
     QString nick_text;
-    static bool exists(const QString& nick_text);
-    static QMap<QString, Microoperation> micops;
 public:
     Microoperation(const QString& nick_text, const QString& text = "");
+    QString getText();
+    QString getNickText();
     void run();
-
-    static void setupMicrooperation();
 };
 
-#endif
+#endif // MICROOPERATION_H
