@@ -78,7 +78,7 @@ void Microoperation::setupMicrooperation()
     micops.insert("IRTOAR", Microoperation("IRTOAR", "AR <- IR[0:11]"));
     micops.insert("IRTOI", Microoperation("IRTOI", "I <- IR[15]"));
     micops.insert("MARTOAR", Microoperation("MARTOAR", "AR <- M[AR]"));
-    micops.insert("CMA", Microoperation("CMA", "CMA <= ~CMA"));
+    micops.insert("CMA", Microoperation("CMA", "CMA <- ~CMA"));
     //micops.insert("PCTOAR", Microoperation("PCTOAR", "AR <- PC"));
 
 }

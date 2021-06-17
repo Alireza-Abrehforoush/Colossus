@@ -1270,6 +1270,8 @@ debug/main.o: main.cpp mainwindow.h \
 		instruction.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QString \
 		variable.h \
+		microoperation.h \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QMap \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \

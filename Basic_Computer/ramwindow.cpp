@@ -40,7 +40,8 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
-    connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(this->updateMicrooperationText(const QString&)));
+    //connect(&values::current_microoperation_text, &CapsulatedValue::valueChanged, this, &RamWindow::updateMicrooperationText);
+    connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)
