@@ -1,5 +1,5 @@
-#ifndef RAMWINDOW_H
-#define RAMWINDOW_H
+#ifndef RAMWINDOW_CXCAGXAVXABHXB
+#define RAMWINDOW_CXCAGXAVXABHXB
 
 #include <QMainWindow>
 
@@ -13,7 +13,11 @@ class RamWindow : public QMainWindow
 
 public:
     explicit RamWindow(QWidget *parent = nullptr);
+    void addItem(int row, int column, const QString& content);
     ~RamWindow();
+
+private slots:
+    void updateRam(int address);
 
 private:
     Ui::RamWindow *ui;

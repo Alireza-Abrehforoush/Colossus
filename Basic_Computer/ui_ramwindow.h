@@ -11,10 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,8 +24,7 @@ class Ui_RamWindow
 {
 public:
     QWidget *centralwidget;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
+    QTableWidget *tableWidget;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -32,21 +32,16 @@ public:
     {
         if (RamWindow->objectName().isEmpty())
             RamWindow->setObjectName(QString::fromUtf8("RamWindow"));
-        RamWindow->resize(450, 600);
+        RamWindow->resize(1080, 600);
         centralwidget = new QWidget(RamWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        scrollArea = new QScrollArea(centralwidget);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(180, 30, 261, 341));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 259, 339));
-        scrollArea->setWidget(scrollAreaWidgetContents);
+        tableWidget = new QTableWidget(centralwidget);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setGeometry(QRect(460, 10, 601, 521));
         RamWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RamWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 450, 26));
+        menubar->setGeometry(QRect(0, 0, 1080, 26));
         RamWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(RamWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -59,7 +54,7 @@ public:
 
     void retranslateUi(QMainWindow *RamWindow)
     {
-        RamWindow->setWindowTitle(QCoreApplication::translate("RamWindow", "MainWindow", nullptr));
+        RamWindow->setWindowTitle(QCoreApplication::translate("RamWindow", "RAM", nullptr));
     } // retranslateUi
 
 };

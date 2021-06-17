@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    Hardware.cpp \
     flag.cpp \
     instruction.cpp \
     instructions.cpp \

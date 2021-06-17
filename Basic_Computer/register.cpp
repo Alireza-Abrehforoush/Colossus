@@ -16,6 +16,10 @@ Register::Register(int size, bool is_signed, QObject *parent) : QObject(parent)
 {
     this->size=size;
     this->is_signed = is_signed;
+    for(int i = 0; i < size; i++)
+    {
+        this->value.push_back(0);
+    }
     return;
 }
 

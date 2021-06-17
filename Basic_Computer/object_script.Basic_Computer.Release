@@ -1,3 +1,4 @@
+release/Hardware.o
 release/flag.o
 release/instruction.o
 release/instructions.o
