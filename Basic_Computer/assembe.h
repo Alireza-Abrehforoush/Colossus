@@ -3,11 +3,11 @@
 
 #include "variable.h"
 #include "instruction.h"
-
+#include <QVector>
 namespace AssemblyVariable
 {
-    QVector<Variable*> Variables_list;
-    QVector<Instruction> Instruction_list;
+    extern QVector<Variable*> Variables_list;
+    extern QVector<Instruction> Instruction_list;
 }
 
 #endif

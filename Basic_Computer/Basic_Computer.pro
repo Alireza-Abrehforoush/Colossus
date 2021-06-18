@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    assembe.cpp\
     Hardware.cpp \
     capsulatedvalue.cpp \
     flag.cpp \

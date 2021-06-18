@@ -1,6 +1,7 @@
 #include "assembe.h"
 
-Assembe::Assembe()
+namespace AssemblyVariable
 {
-
+     QVector<Variable*> Variables_list;
+     QVector<Instruction> Instruction_list;
 }
