@@ -127,6 +127,14 @@ void Microoperation::run(int sleep_time)
             hardware::PC.increment();
         }
     }
+    else if(this->nick_text=="INCSC")
+    {
+        hardware::SC.increment();
+    }
+    else if(this->nick_text == "INCSC")
+    {
+        hardware::SC.clear();
+    }
 
     else if(this->nick_text == "AND")
     {
@@ -143,6 +151,21 @@ void Microoperation::run(int sleep_time)
     else if(this->nick_text == "STA")
     {
         hardware::RAM.write(hardware::AR.output(), hardware::AC.output());
+    }
+    else if(this->nick_text =="MARTOPC")
+    {
+        hardware::PC.load(hardware::RAM.read(hardware::AR.output()));
+    }
+    else if(this->nick_text == "BSA")
+    {
+        hardware::RAM.write(hardware::AR.output(),hardware::PC.output());
+        hardware::PC.load(hardware::RAM.read(hardware::AR.output())+1);
+
+    }
+    else if(this->nick_text == "INCMAR")
+    {
+        hardware::RAM.write(hardware::AR.output(),hardware::RAM.read(hardware::AR.output())+1);
+
     }
     values::current_microoperation_text.setValue(text);
     mytime::delay(sleep_time);
@@ -173,6 +196,12 @@ void Microoperation::setupMicrooperation()
     micops.insert("ADD", Microoperation("ADD", "AC <- AC + (M[XXX] or M[M[XXX]])"));
     micops.insert("LDA", Microoperation("LDA", "AC <- M[XXX] or M[M[XXX]]"));
     micops.insert("STA", Microoperation("STA", "M[XXX] or M[M[XXX]] <- AC"));
+    micops.insert("STA", Microoperation("INCSC", "SC<-SC+1"));
+    micops.insert("STA", Microoperation("CLSC", "SC<-0"));
+    micops.insert("MARTOPC", Microoperation("MARTOPC", "PC <-(M[XXX] or M[M[XXX]])"));
+    micops.insert("BSA",Microoperation("BSA","PC <-(M[XXX] or M[M[XXX]])+1), (M[XXX] or M[M[XXX]])<-PC"));
+    micops.insert("INCMAR",Microoperation("INCMAR","M[XX]<-M[XX]+1"));
+
     //micops.insert("PCTOAR", Microoperation("PCTOAR", "AR <- PC"));
 
 }

@@ -140,41 +140,41 @@ void RamWindow::updateRam(int address)
 
 void RamWindow::updateRegisters()
 {
-    this->addItem(ui->flags_table,0,0,"AC");
-    this->addItem(ui->flags_table,0,1,QString::number(hardware::AC.output()));
-    this->addItem(ui->flags_table,1,0,"IR");
-    this->addItem(ui->flags_table,1,1,QString::number(hardware::IR.output()));
-    this->addItem(ui->flags_table,2,0,"AR");
-    this->addItem(ui->flags_table,2,1,QString::number(hardware::AR.output()));
-    this->addItem(ui->flags_table,3,0,"DR");
-    this->addItem(ui->flags_table,3,1,QString::number(hardware::DR.output()));
-    this->addItem(ui->flags_table,4,0,"INPR");
-    this->addItem(ui->flags_table,4,1,QString::number(hardware::INPR.output()));
-    this->addItem(ui->flags_table,5,0,"OUTR");
-    this->addItem(ui->flags_table,5,1,QString::number(hardware::OUTR.output()));
-    this->addItem(ui->flags_table,6,0,"AC");
-    this->addItem(ui->flags_table,6,1,QString::number(hardware::AC.output()));
-    this->addItem(ui->flags_table,7,0,"SC");
-    this->addItem(ui->flags_table,7,1,QString::number(hardware::SC.output()));
+    this->addItem(ui->register_table,0,0,"AC");
+    this->addItem(ui->register_table,0,1,QString::number(hardware::AC.output()));
+    this->addItem(ui->register_table,1,0,"IR");
+    this->addItem(ui->register_table,1,1,QString::number(hardware::IR.output()));
+    this->addItem(ui->register_table,2,0,"AR");
+    this->addItem(ui->register_table,2,1,QString::number(hardware::AR.output()));
+    this->addItem(ui->register_table,3,0,"DR");
+    this->addItem(ui->register_table,3,1,QString::number(hardware::DR.output()));
+    this->addItem(ui->register_table,4,0,"INPR");
+    this->addItem(ui->register_table,4,1,QString::number(hardware::INPR.output()));
+    this->addItem(ui->register_table,5,0,"OUTR");
+    this->addItem(ui->register_table,5,1,QString::number(hardware::OUTR.output()));
+    this->addItem(ui->register_table,6,0,"AC");
+    this->addItem(ui->register_table,6,1,QString::number(hardware::AC.output()));
+    this->addItem(ui->register_table,7,0,"SC");
+    this->addItem(ui->register_table,7,1,QString::number(hardware::SC.output()));
 
 }
 
 void RamWindow::updateFlags()
 {
-    this->addItem(ui->register_table,0,0,"I");
-    this->addItem(ui->register_table,0,1,QString::number(hardware::I.getValue()));
-    this->addItem(ui->register_table,1,0,"E");
-    this->addItem(ui->register_table,1,1,QString::number(hardware::E.getValue()));
-    this->addItem(ui->register_table,2,0,"R");
-    this->addItem(ui->register_table,2,1,QString::number(hardware::S.getValue()));
-    this->addItem(ui->register_table,3,0,"S");
-    this->addItem(ui->register_table,3,1,QString::number(hardware::IEN.getValue()));
-    this->addItem(ui->register_table,4,0,"IEN");
-    this->addItem(ui->register_table,4,1,QString::number(hardware::IEN.getValue()));
-    this->addItem(ui->register_table,5,0,"FGI");
-    this->addItem(ui->register_table,5,1,QString::number(hardware::FGI.getValue()));
-    this->addItem(ui->register_table,6,0,"FGO");
-    this->addItem(ui->register_table,6,1,QString::number(hardware::FGO.getValue()));
+    this->addItem(ui->flags_table,0,0,"I");
+    this->addItem(ui->flags_table,0,1,QString::number(hardware::I.getValue()));
+    this->addItem(ui->flags_table,1,0,"E");
+    this->addItem(ui->flags_table,1,1,QString::number(hardware::E.getValue()));
+    this->addItem(ui->flags_table,2,0,"R");
+    this->addItem(ui->flags_table,2,1,QString::number(hardware::S.getValue()));
+    this->addItem(ui->flags_table,3,0,"S");
+    this->addItem(ui->flags_table,3,1,QString::number(hardware::IEN.getValue()));
+    this->addItem(ui->flags_table,4,0,"IEN");
+    this->addItem(ui->flags_table,4,1,QString::number(hardware::IEN.getValue()));
+    this->addItem(ui->flags_table,5,0,"FGI");
+    this->addItem(ui->flags_table,5,1,QString::number(hardware::FGI.getValue()));
+    this->addItem(ui->flags_table,6,0,"FGO");
+    this->addItem(ui->flags_table,6,1,QString::number(hardware::FGO.getValue()));
 }
 
 void RamWindow::updateMicrooperationText(const QString &text)

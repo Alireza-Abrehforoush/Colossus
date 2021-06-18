@@ -260,6 +260,7 @@ void Instruction::execute(int sleep_time)
     }
     else
     {
+        Microoperation sc("CLSC");
         this->fetch(sleep_time);
         this->decode(sleep_time);
         if(this->getType() == instructions::mem_ref)
@@ -292,6 +293,10 @@ void Instruction::execute(int sleep_time)
             {
                 Microoperation temp("STA");
                 temp.run(sleep_time);
+            }
+            else if(this->name == "BUN")
+            {
+
             }
         }
         else
@@ -346,8 +351,30 @@ void Instruction::execute(int sleep_time)
                 Microoperation temp("SZA");
                 temp.run(sleep_time);
             }
+            else if(this->name == "BUN")
+            {
+                Microoperation temp("MARTOPC");
+                temp.run(sleep_time);
+            }
+            else if(this->name == "BSA")
+            {
+                Microoperation temp("BSA");
+                temp.run(sleep_time);
+            }
+            else if(this->name == "ISZ")
+            {
+                Microoperation temp("INCMAR");
+                temp.run(sleep_time);
+                sc.run(sleep_time);
+                Microoperation temp2("INCPC");
+                if(hardware::RAM.read(hardware::AR.output())==0)
+                {
+                    temp2.run(sleep_time);
+                }
+            }
 
 
+            sc.run(sleep_time);
         }
     }
 }
@@ -366,14 +393,19 @@ void Instruction::getDirectAddress(int sleep_time)
 void Instruction::fetch(int sleep_time)
 {
     Microoperation temp1("PCTOAR"), temp2("INCPC"), temp3("MARTOIR");
+    Microoperation sc("INCSC");
     temp1.run(sleep_time);
     temp2.run(sleep_time);
+    sc.run(sleep_time);
     temp3.run(sleep_time);
+    sc.run(sleep_time);
 }
 
 void Instruction::decode(int sleep_time)
 {
     Microoperation temp1("IRTOAR"), temp2("IRTOI");
+    Microoperation sc("INCSC");
     temp1.run(sleep_time);
     temp2.run(sleep_time);
+    sc.run(sleep_time);
 }
