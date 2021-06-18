@@ -254,7 +254,10 @@ void MainWindow::detectInstruction(QVector<QString> total)
        }
 
        else{
-            AssemblyVariable::Instruction_list.push_back(temp);
+            if(temp.getType()!=instructions::directives)
+            {
+                AssemblyVariable::Instruction_list.push_back(temp);
+            }
             qDebug()<<address<<"\t"<<hardware::RAM.read(address)<<"\n";
 
                 if(temp.getName() == "ORG")
@@ -269,6 +272,7 @@ void MainWindow::detectInstruction(QVector<QString> total)
 
 
 }
+
 
 void MainWindow::text_edit_correct_color()
 {
@@ -449,6 +453,19 @@ void MainWindow::clearVariableTable()
     return;
 }
 
+void MainWindow::updateVariableTable(int address)
+{
+    for(int i=0;i<AssemblyVariable::Variables_list.size();i++)
+    {
+        if(AssemblyVariable::Variables_list[i]->getAddress()==address)
+        {
+            this->addItem(i, 0, AssemblyVariable::Variables_list[i]->getName());
+            this->addItem(i, 1, QString::number(address, 10));
+            this->addItem(i, 2, QString::number(hardware::RAM.read(address), 16));
+        }
+    }
+}
+
 void MainWindow::keyPressedEvent(QKeyEvent *e)
 {
     if (e->key()==Qt::DownArrow)
@@ -475,6 +492,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_update_autocomplete()));
     connect(this->ui->text_edit, SIGNAL(textChanged()),this,SLOT(text_edit_check_syntax()));
     connect(this->ui->actionAssemble_all_2, SIGNAL(triggered()), this, SLOT(assemble_triggered()));
+    connect(&hardware::RAM,SIGNAL(valueChanged(int)),this,SLOT(updateVariableTable(int)));
+
 
 }
 

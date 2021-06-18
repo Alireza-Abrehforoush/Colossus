@@ -242,6 +242,11 @@ int Instruction::getType()
     return this->type;
 }
 
+int Instruction::getAddress() const
+{
+    return this->address;
+}
+
 QString Instruction::getVar()
 {
     return this->var;

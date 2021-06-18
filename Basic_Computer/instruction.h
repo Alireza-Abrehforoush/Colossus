@@ -25,6 +25,7 @@ public:
     bool getSyntaxValid();
     QString getName();
     int getType();
+    int getAddress()const;
     QString getVar();
     void execute();
     ~Instruction();

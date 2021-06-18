@@ -25,6 +25,7 @@ class MainWindow : public QMainWindow
     QVector<QString> detectVariable(QVector<QString> total);
     void setTextEditColor(int instruction);
     void detectInstruction(QVector<QString> total);
+
     RamWindow* ram_window = nullptr;
 private slots:
     void text_edit_correct_color();
@@ -36,6 +37,7 @@ private slots:
     void setupVariableTable();
     void addItem(int row, int column, const QString &content);
     void clearVariableTable();
+    void updateVariableTable(int address);
 protected:
     void keyPressedEvent(QKeyEvent* e);
 public:

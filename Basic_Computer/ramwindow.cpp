@@ -2,6 +2,7 @@
 #include "ui_ramwindow.h"
 #include "Hardware.h"
 #include "values.h"
+#include "assembe.h"
 #include <QDebug>
 void RamWindow::closeEvent(QCloseEvent *event)
 {
@@ -42,6 +43,7 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
+    connect(this->ui->run, SIGNAL(clicked()), this, SLOT(run()));
     connect(&values::current_microoperation_text, &CapsulatedValue::valueChanged, this, &RamWindow::updateMicrooperationText);
     //connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
 }
@@ -57,6 +59,15 @@ void RamWindow::addItem(int row, int column, const QString &content)
 RamWindow::~RamWindow()
 {
     delete ui;
+}
+
+void RamWindow::run()
+{
+    hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
+    for(int i=0;i<AssemblyVariable::Instruction_list.size();i++)
+    {
+        AssemblyVariable::Instruction_list[i].execute();
+    }
 }
 
 void RamWindow::updateRam(int address)

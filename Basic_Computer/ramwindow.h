@@ -18,6 +18,7 @@ public:
     ~RamWindow();
 
 private slots:
+    void run();
     void updateRam(int address);
     void updateMicrooperationText(const QString& text);
 private:
