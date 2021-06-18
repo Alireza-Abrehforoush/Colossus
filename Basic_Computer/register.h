@@ -14,12 +14,13 @@ private:
     bool is_signed;
     void complement();
 public:
-    explicit Register(int size = 16, bool is_signed = false, QObject *parent = nullptr);
-    explicit Register(QVector<bool> vec, int size = 16, QObject *parent = nullptr);
+    explicit Register(int size = 16, bool is_signed = true, QObject *parent = nullptr);
+    explicit Register(QVector<bool> vec, int size = 16, bool is_signed=true,QObject *parent = nullptr);
     void load(long long int value);
     void clear();
     void increment();
     long long int output();
+    QVector<bool> getVec()const;
     bool at(int index);
     QString toHex();
     void onesComplement();

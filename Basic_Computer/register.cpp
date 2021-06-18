@@ -23,16 +23,17 @@ Register::Register(int size, bool is_signed, QObject *parent) : QObject(parent)
     return;
 }
 
-Register::Register(QVector<bool> vec, int size, QObject *parent)
+Register::Register(QVector<bool> vec, int size,bool is_signed, QObject *parent):QObject (parent)
 {
     if(vec.size() == size)
     {
         for(long long int i = 0; i < vec.size(); i++)
         {
-            this->value[i] = vec[i];
+            this->value.push_back(vec[i]);
         }
         this->size = size;
     }
+    this->is_signed=is_signed;
 }
 
 void Register::load(long long int value)
@@ -85,6 +86,11 @@ long long int Register::output()
         }
     }
     return res;
+}
+
+QVector<bool> Register::getVec() const
+{
+    return this->value;
 }
 
 bool Register::at(int index)

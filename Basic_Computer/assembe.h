@@ -8,6 +8,8 @@ namespace AssemblyVariable
 {
     extern QVector<Variable*> Variables_list;
     extern QVector<Instruction> Instruction_list;
+    bool existVariableName(const QString& variable_name);
+    int getVariableAddress(const QString & variable_name);
 }
 
 #endif

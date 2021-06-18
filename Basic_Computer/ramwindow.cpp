@@ -2,6 +2,7 @@
 #include "ui_ramwindow.h"
 #include "Hardware.h"
 #include "values.h"
+#include <QDebug>
 void RamWindow::closeEvent(QCloseEvent *event)
 {
     emit this->closed();
@@ -25,6 +26,7 @@ RamWindow::RamWindow(QWidget *parent) :
     //
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setRowCount(4096);
+    ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Label"));
     ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Address"));
     ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem("Instruction"));
@@ -40,8 +42,8 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
-    //connect(&values::current_microoperation_text, &CapsulatedValue::valueChanged, this, &RamWindow::updateMicrooperationText);
-    connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
+    connect(&values::current_microoperation_text, &CapsulatedValue::valueChanged, this, &RamWindow::updateMicrooperationText);
+    //connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)

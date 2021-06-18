@@ -3,6 +3,7 @@
 #include "parser.h"
 #include "microoperation.h"
 #include "Hardware.h"
+#include "assembe.h"
 
 Instruction::Instruction(const QString &line, long long line_no, int address)
 {
@@ -24,7 +25,7 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
         return;
     }
 
-    if(this->type == instructions::reg_ref || this->type == instructions::io_ref)
+   if(this->type == instructions::reg_ref || this->type == instructions::io_ref)
     {
         if(part_number != 1)
         {
@@ -91,16 +92,80 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
     {
         if(this->type == instructions::mem_ref)
         {
-            QVector<bool> temp(16);
+            QVector<bool> total(16);
+            //put indirection bit
             if(this->indirect)
             {
-                temp[15] = 1;
+                total[15] = 1;
             }
             else
             {
-                temp[15] = 0;
+                total[15] = 0;
             }
             ////////////////
+            //put OPCode
+            if(this->name == "AND")
+            {
+                total[14]=0;
+                total[13]=0;
+                total[12]=0;
+            }
+            else if(this->name == "ADD")
+            {
+                total[14]=0;
+                total[13]=0;
+                total[12]=1;
+            }
+            else if(this->name == "LDA")
+            {
+                total[14]=0;
+                total[13]=1;
+                total[12]=0;
+            }
+            else if(this->name == "STA")
+            {
+                total[14]=0;
+                total[13]=1;
+                total[12]=1;
+            }
+            else if(this->name == "BUN")
+            {
+                total[14]=1;
+                total[13]=0;
+                total[12]=0;
+            }
+            else if(this->name == "BSA")
+            {
+                total[14]=1;
+                total[13]=0;
+                total[12]=1;
+            }
+            else if(this->name == "ISZ")
+            {
+                total[14]=1;
+                total[13]=1;
+                total[12]=0;
+            }
+            //PUT ADDRESS
+            if(AssemblyVariable::existVariableName(this->var)==false)
+            {
+
+            }
+            else
+            {
+                int addr=AssemblyVariable::getVariableAddress(this->var);
+                Register temp(12,false);
+                temp.load(addr);
+                QVector<bool>vec =temp.getVec();
+                for(int i=0;i<12;i++)
+                {
+                    total[i]=vec[i];
+                }
+                Register r(total,16,false);
+                hardware::RAM.write(this->address,r.output());
+
+            }
+
         }
 
         else
@@ -155,6 +220,11 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
         }
 
     }
+}
+
+Instruction::Instruction()
+{
+
 }
 
 bool Instruction::getSyntaxValid()
@@ -275,6 +345,11 @@ void Instruction::execute()
 
         }
     }
+}
+
+Instruction::~Instruction()
+{
+
 }
 
 void Instruction::getDirectAddress()

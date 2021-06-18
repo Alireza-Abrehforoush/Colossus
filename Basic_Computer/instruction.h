@@ -21,11 +21,13 @@ private:
     static void decode();
 public:
     Instruction(const QString& line, long long int line_no = 0, int address = 0);
+    Instruction();
     bool getSyntaxValid();
     QString getName();
     int getType();
     QString getVar();
     void execute();
+    ~Instruction();
 };
 
 #endif

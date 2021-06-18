@@ -181,6 +181,7 @@ QVector<QString> MainWindow::detectVariable(QVector<QString> total)
 {
     int address = 0;
     QVector<QString> instructions;
+    AssemblyVariable::Variables_list.clear();
     for(long long int i = 0; i < total.size(); i++)
     {
         if(total[i].indexOf(',') >= 0)
@@ -203,7 +204,7 @@ QVector<QString> MainWindow::detectVariable(QVector<QString> total)
                 if(temp.getName() == "ORG")
                 {
                     address = temp.getVar().toInt();
-                    address++;
+
                 }
             }
             if(Parser::isEmptyLine(total[i]) == false)
@@ -235,8 +236,37 @@ void MainWindow::setTextEditColor(int instruction)
     }
 }
 
-QVector<QString> MainWindow::detectInstruction(QVector<QString> total)
+void MainWindow::detectInstruction(QVector<QString> total)
 {
+    int address = 0;
+    AssemblyVariable::Instruction_list.clear();
+    for(long long int i = 0; i < total.size(); i++)
+    {
+       Instruction temp(total[i],i,address);
+       if(temp.getSyntaxValid()==false)
+       {
+           continue;
+           if(Parser::isEmptyLine(total[i]) == false)
+           {
+            address++;
+           }
+
+       }
+
+       else{
+            AssemblyVariable::Instruction_list.push_back(temp);
+            qDebug()<<address<<"\t"<<hardware::RAM.read(address)<<"\n";
+
+                if(temp.getName() == "ORG")
+                {
+                    address = temp.getVar().toInt();
+
+                }
+            address++;
+       }
+
+    }
+
 
 }
 
@@ -368,12 +398,13 @@ void MainWindow::assemble_triggered()
     }
     QVector<QString> text_without_comment = this->ignoreComments(this->ui->text_edit->toPlainText());
     QVector<QString> instructions = this->detectVariable(text_without_comment);
+    this->detectInstruction(instructions);
+
     this->ram_window = new RamWindow();
     this->ram_window->show();
     this->setupVariableTable();
     connect(this->ram_window, SIGNAL(closed()), this, SLOT(deleteRamWindow()));
-    Instruction cma("CMA", 2, 258);
-    cma.execute();
+
 }
 
 void MainWindow::deleteRamWindow()
