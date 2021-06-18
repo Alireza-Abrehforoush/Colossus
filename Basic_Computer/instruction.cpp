@@ -31,7 +31,6 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
             this->syntax_valid = false;
             return;
         }
-
     }
     else if(this->type == instructions::mem_ref)
     {
@@ -87,6 +86,75 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
 
     this->name=main_part[0];
     this->syntax_valid=true;
+
+    if(address != 0)
+    {
+        if(this->type == instructions::mem_ref)
+        {
+            QVector<bool> temp(16);
+            if(this->indirect)
+            {
+                temp[15] = 1;
+            }
+            else
+            {
+                temp[15] = 0;
+            }
+            ////////////////
+        }
+
+        else
+        {
+            QString kemp = "";
+            if(this->name == "CLA")
+            {
+                kemp = "7800";
+            }
+            else if(this->name == "CLE")
+            {
+                kemp = "7400";
+            }
+            else if(this->name == "CMA")
+            {
+                kemp = "7200";
+            }
+            else if(this->name == "CME")
+            {
+                kemp = "7100";
+            }
+            else if(this->name == "CIR")
+            {
+                kemp = "7080";
+            }
+            else if(this->name == "CIL")
+            {
+                kemp = "7040";
+            }
+            else if(this->name == "INC")
+            {
+                kemp = "7020";
+            }
+            else if(this->name == "SPA")
+            {
+                kemp = "7010";
+            }
+            else if(this->name == "SNA")
+            {
+                kemp = "7008";
+            }
+            else if(this->name == "SZA")
+            {
+                kemp = "7004";
+            }
+            else if(this->name == "SZE")
+            {
+                kemp = "7002";
+            }
+            int value = kemp.toInt(nullptr, 16);
+            hardware::RAM.write(this->address, value);
+        }
+
+    }
 }
 
 bool Instruction::getSyntaxValid()
@@ -129,14 +197,82 @@ void Instruction::execute()
             {
                 ////////////////////////////
             }
+
+            if(this->name == "AND")
+            {
+                Microoperation temp("AND");
+                temp.run();
+            }
+            else if(this->name == "ADD")
+            {
+                Microoperation temp("ADD");
+                temp.run();
+            }
+            else if(this->name == "LDA")
+            {
+                Microoperation temp("LDA");
+                temp.run();
+            }
+            else if(this->name == "STA")
+            {
+                Microoperation temp("STA");
+                temp.run();
+            }
         }
         else
         {
-            if(this->name == "CMA")
+            if(this->name == "CLA")
             {
-                Microoperation cma("CMA");
-                cma.run();////////////
+                Microoperation temp("CLA");
+                temp.run();
             }
+            else if(this->name == "CLE")
+            {
+                Microoperation temp("CLE");
+                temp.run();
+            }
+            else if(this->name == "CMA")
+            {
+                Microoperation temp("CMA");
+                temp.run();
+            }
+            else if(this->name == "CME")
+            {
+                Microoperation temp("CME");
+                temp.run();
+            }
+            else if(this->name == "CIR")
+            {
+                Microoperation temp("CIR");
+                temp.run();
+            }
+            else if(this->name == "CIL")
+            {
+                Microoperation temp("CIL");
+                temp.run();
+            }
+            else if(this->name == "INC")
+            {
+                Microoperation temp("INCAC");
+                temp.run();
+            }
+            else if(this->name == "SPA")
+            {
+                Microoperation temp("SPA");
+                temp.run();
+            }
+            else if(this->name == "SNA")
+            {
+                Microoperation temp("SNA");
+                temp.run();
+            }
+            else if(this->name == "SZA")
+            {
+                Microoperation temp("SZA");
+                temp.run();
+            }
+
+
         }
     }
 }

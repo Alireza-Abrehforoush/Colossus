@@ -23,6 +23,18 @@ Register::Register(int size, bool is_signed, QObject *parent) : QObject(parent)
     return;
 }
 
+Register::Register(QVector<bool> vec, int size, QObject *parent)
+{
+    if(vec.size() == size)
+    {
+        for(long long int i = 0; i < vec.size(); i++)
+        {
+            this->value[i] = vec[i];
+        }
+        this->size = size;
+    }
+}
+
 void Register::load(long long int value)
 {
     bool is_negetive=value<0;

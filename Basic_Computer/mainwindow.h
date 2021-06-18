@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
     QVector<QString> ignoreComments(const QString& text);
     QVector<QString> detectVariable(QVector<QString> total);
     void setTextEditColor(int instruction);
+    QVector<QString> detectInstruction(QVector<QString> total);
     RamWindow* ram_window = nullptr;
 private slots:
     void text_edit_correct_color();

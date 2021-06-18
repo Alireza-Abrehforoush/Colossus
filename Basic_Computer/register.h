@@ -15,6 +15,7 @@ private:
     void complement();
 public:
     explicit Register(int size = 16, bool is_signed = false, QObject *parent = nullptr);
+    explicit Register(QVector<bool> vec, int size = 16, QObject *parent = nullptr);
     void load(long long int value);
     void clear();
     void increment();

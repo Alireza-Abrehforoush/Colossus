@@ -235,6 +235,11 @@ void MainWindow::setTextEditColor(int instruction)
     }
 }
 
+QVector<QString> MainWindow::detectInstruction(QVector<QString> total)
+{
+
+}
+
 void MainWindow::text_edit_correct_color()
 {
 

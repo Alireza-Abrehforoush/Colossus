@@ -125,6 +125,22 @@ void Microoperation::run()
         }
     }
 
+    else if(this->nick_text == "AND")
+    {
+        hardware::AC.load(hardware::AC.output() & hardware::RAM.read(hardware::AR.output()));
+    }
+    else if(this->nick_text == "ADD")
+    {
+        hardware::AC.load(hardware::AC.output() + hardware::RAM.read(hardware::AR.output()));
+    }
+    else if(this->nick_text == "LDA")
+    {
+        hardware::AC.load(hardware::RAM.read(hardware::AR.output()));
+    }
+    else if(this->nick_text == "STA")
+    {
+        hardware::RAM.write(hardware::AR.output(), hardware::AC.output());
+    }
     values::current_microoperation_text.setValue(text);
 }
 
@@ -149,7 +165,10 @@ void Microoperation::setupMicrooperation()
     micops.insert("SZA", Microoperation("SZA", "if(AC = 0) PC <- PC + 1"));
     micops.insert("SZE", Microoperation("SZE", "if(E = 0) PC <- PC + 1"));
 
-
+    micops.insert("AND", Microoperation("AND", "AC <- AC AND (M[XXX] or M[M[XXX]])"));
+    micops.insert("ADD", Microoperation("ADD", "AC <- AC + (M[XXX] or M[M[XXX]])"));
+    micops.insert("LDA", Microoperation("LDA", "AC <- M[XXX] or M[M[XXX]]"));
+    micops.insert("STA", Microoperation("STA", "M[XXX] or M[M[XXX]] <- AC"));
     //micops.insert("PCTOAR", Microoperation("PCTOAR", "AR <- PC"));
 
 }
