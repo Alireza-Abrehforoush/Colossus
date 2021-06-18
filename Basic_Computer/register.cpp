@@ -99,6 +99,36 @@ void Register::onesComplement()
     return;
 }
 
+void Register::shiftLeft(bool carry)
+{
+    for(int i = 0; i < size - 1; i++)
+    {
+        value[i] = value[i + 1];
+    }
+    value[size - 1] = carry;
+    return;
+}
+
+void Register::shiftRight(bool carry)
+{
+    for(int i = size - 1; i > 0; i--)
+    {
+        value[i] = value[i - 1];
+    }
+    value[0] = carry;
+    return;
+}
+
+bool Register::isZero()
+{
+    bool r = false;
+    for(int i = 0; i < this->size; i++)
+    {
+        r = r || value[i];
+    }
+    return !r;
+}
+
 void Register::copy(Register &from, int i0, int j0, Register &to, int i1, int j1)
 {
     if(j1 - i1 != j0 - i0)

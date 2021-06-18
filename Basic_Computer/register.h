@@ -22,6 +22,10 @@ public:
     bool at(int index);
     QString toHex();
     void onesComplement();
+    void shiftLeft(bool carry = false);
+    void shiftRight(bool carry = false);
+    bool isZero();
+
     static void copy(Register & from, int i0, int j0, Register & to,int i1,int j1);
     static void copy(Register & from, int i, Flag& to);
 signals:

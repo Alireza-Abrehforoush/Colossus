@@ -1,5 +1,5 @@
-#ifndef FLAG_H
-#define FLAG_H
+#ifndef FLAG_ZERXRGFCYYYGVG
+#define FLAG_ZERXRGFCYYYGVG
 
 #include <QObject>
 
@@ -10,6 +10,7 @@ private:
     bool value;
 public:
     explicit Flag(QObject *parent = nullptr);
+    void complement();
     void setValue(bool value);
     bool getValue();
 

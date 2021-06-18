@@ -27,4 +27,4 @@ signals:
     void closed();
 };
 
-#endif // RAMWINDOW_H
+#endif
