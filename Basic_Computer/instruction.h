@@ -16,9 +16,9 @@ private:
     QString error_content;
     bool indirect = false;
 
-    static void getDirectAddress();
-    static void fetch();
-    static void decode();
+    static void getDirectAddress(int sleep_time);
+    static void fetch(int sleep_time);
+    static void decode(int sleep_time);
 public:
     Instruction(const QString& line, long long int line_no = 0, int address = 0);
     Instruction();
@@ -27,7 +27,7 @@ public:
     int getType();
     int getAddress()const;
     QString getVar();
-    void execute();
+    void execute(int sleep_time);
     ~Instruction();
 };
 

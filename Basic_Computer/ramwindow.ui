@@ -78,12 +78,12 @@
      <string>Flags:</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>
       <y>510</y>
-      <width>293</width>
+      <width>295</width>
       <height>30</height>
      </rect>
     </property>
@@ -111,7 +111,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>32</x>
@@ -197,6 +197,9 @@
        </item>
        <item>
         <widget class="QSlider" name="speed">
+         <property name="value">
+          <number>20</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

@@ -1,7 +1,7 @@
 #include "variable.h"
 #include "parser.h"
 #include "Hardware.h"
-
+#include <QDebug>
 QVector<QString> Variable::var_pre_assemble;
 int Variable::getAddress()
 {
@@ -40,6 +40,7 @@ Variable::Variable(const QString& line, int address, long long int line_no, QObj
     if(main_part[1]=="DEC")
     {
         hardware::RAM.write(this->address, temp_value.toLongLong());
+        qDebug()<<hardware::RAM.read(this->address);
     }
     else if(main_part[1]=="HEX")
     {

@@ -1,12 +1,13 @@
 #include "Microoperation.h"
 #include "Hardware.h"
 #include "values.h"
-
-
+#include "QDebug"
+#include "mytime.h"
 QMap<QString, Microoperation> Microoperation::micops;
 
 bool Microoperation::exists(const QString &nick_text)
 {
+
     auto it = micops.find(nick_text);
     return !(it == micops.end());
 }
@@ -36,7 +37,7 @@ QString Microoperation::getNickText()
     return this->nick_text;
 }
 
-void Microoperation::run()
+void Microoperation::run(int sleep_time)
 {
     if(this->nick_text == "PCTOAR")
     {
@@ -64,7 +65,9 @@ void Microoperation::run()
     }
     else if(this->nick_text == "CMA")
     {
+        qDebug()<<hardware::AC.output();
         hardware::AC.onesComplement();
+        qDebug()<<hardware::AC.output();
     }
     else if(this->nick_text == "CLA")
     {
@@ -142,6 +145,7 @@ void Microoperation::run()
         hardware::RAM.write(hardware::AR.output(), hardware::AC.output());
     }
     values::current_microoperation_text.setValue(text);
+    mytime::delay(sleep_time);
 }
 
 void Microoperation::setupMicrooperation()

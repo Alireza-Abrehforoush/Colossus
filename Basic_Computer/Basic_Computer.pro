@@ -41,7 +41,8 @@ SOURCES += \
     autocompleteaction.cpp \
     values.cpp \
     variable.cpp \
-    parser.cpp
+    parser.cpp \
+    mytime.cpp
 
 HEADERS += \
     Hardware.h \
@@ -59,7 +60,8 @@ HEADERS += \
     autocompleteaction.h \
     values.h \
     variable.h \
-    parser.h
+    parser.h \
+    mytime.h
 
 FORMS += \
         mainwindow.ui \

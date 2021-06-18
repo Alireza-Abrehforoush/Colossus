@@ -38,12 +38,13 @@ Register::Register(QVector<bool> vec, int size,bool is_signed, QObject *parent):
 
 void Register::load(long long int value)
 {
+
     bool is_negetive=value<0;
     if (is_negetive)
     {
         value=value*-1;
     }
-    for(int i=0;value && i<this->size-1;i++)
+    for(int i=0; value&&i<this->size;i++)
     {
         this->value[i]=value%2;
         value/=2;
@@ -78,7 +79,7 @@ long long int Register::output()
     {
         if(this->is_signed)
         {
-            res = res-pow(2,this->size);
+            res = res-pow(2,this->size-1);
         }
         else
         {

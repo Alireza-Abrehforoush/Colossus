@@ -15,7 +15,7 @@ public:
     Microoperation(const QString& nick_text, const QString& text = "");
     QString getText() const;
     QString getNickText();
-    void run();
+    void run(int sleep_time);
 
     static void setupMicrooperation();
 };

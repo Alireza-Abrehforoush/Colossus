@@ -252,7 +252,7 @@ QString Instruction::getVar()
     return this->var;
 }
 
-void Instruction::execute()
+void Instruction::execute(int sleep_time)
 {
     if(this->syntax_valid == false)
     {
@@ -260,13 +260,13 @@ void Instruction::execute()
     }
     else
     {
-        this->fetch();
-        this->decode();
+        this->fetch(sleep_time);
+        this->decode(sleep_time);
         if(this->getType() == instructions::mem_ref)
         {
             if(this->indirect == true)
             {
-                this->getDirectAddress();
+                this->getDirectAddress(sleep_time);
             }
             else
             {
@@ -276,22 +276,22 @@ void Instruction::execute()
             if(this->name == "AND")
             {
                 Microoperation temp("AND");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "ADD")
             {
                 Microoperation temp("ADD");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "LDA")
             {
                 Microoperation temp("LDA");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "STA")
             {
                 Microoperation temp("STA");
-                temp.run();
+                temp.run(sleep_time);
             }
         }
         else
@@ -299,52 +299,52 @@ void Instruction::execute()
             if(this->name == "CLA")
             {
                 Microoperation temp("CLA");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "CLE")
             {
                 Microoperation temp("CLE");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "CMA")
             {
                 Microoperation temp("CMA");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "CME")
             {
                 Microoperation temp("CME");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "CIR")
             {
                 Microoperation temp("CIR");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "CIL")
             {
                 Microoperation temp("CIL");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "INC")
             {
                 Microoperation temp("INCAC");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "SPA")
             {
                 Microoperation temp("SPA");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "SNA")
             {
                 Microoperation temp("SNA");
-                temp.run();
+                temp.run(sleep_time);
             }
             else if(this->name == "SZA")
             {
                 Microoperation temp("SZA");
-                temp.run();
+                temp.run(sleep_time);
             }
 
 
@@ -357,23 +357,23 @@ Instruction::~Instruction()
 
 }
 
-void Instruction::getDirectAddress()
+void Instruction::getDirectAddress(int sleep_time)
 {
     Microoperation temp("MARTOAR");
-    temp.run();
+    temp.run(sleep_time);
 }
 
-void Instruction::fetch()
+void Instruction::fetch(int sleep_time)
 {
     Microoperation temp1("PCTOAR"), temp2("INCPC"), temp3("MARTOIR");
-    temp1.run();
-    temp2.run();
-    temp3.run();
+    temp1.run(sleep_time);
+    temp2.run(sleep_time);
+    temp3.run(sleep_time);
 }
 
-void Instruction::decode()
+void Instruction::decode(int sleep_time)
 {
     Microoperation temp1("IRTOAR"), temp2("IRTOI");
-    temp1.run();
-    temp2.run();
+    temp1.run(sleep_time);
+    temp2.run(sleep_time);
 }
