@@ -123,7 +123,7 @@ RamWindow::~RamWindow()
 void RamWindow::run()
 {
 
-    int sleep_time=(100-ui->speed->value())*10;
+    int sleep_time=(100-ui->speed->value())/**10*/;
     hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
     for(int i=0;i<AssemblyVariable::Instruction_list.size();i++)
     {

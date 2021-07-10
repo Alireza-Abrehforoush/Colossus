@@ -1,3 +1,4 @@
+debug/assembe.o
 debug/Hardware.o
 debug/capsulatedvalue.o
 debug/flag.o
@@ -14,6 +15,7 @@ debug/autocompleteaction.o
 debug/values.o
 debug/variable.o
 debug/parser.o
+debug/mytime.o
 debug/moc_capsulatedvalue.o
 debug/moc_flag.o
 debug/moc_mainwindow.o

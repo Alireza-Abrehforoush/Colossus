@@ -34,12 +34,12 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_6;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *run;
     QPushButton *step;
     QPushButton *reset;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_6;
     QTableWidget *register_table;
@@ -84,41 +84,41 @@ public:
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(300, 30, 61, 41));
         label_6->setFont(font);
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(80, 510, 293, 30));
-        horizontalLayout_3 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(80, 510, 295, 30));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        run = new QPushButton(widget);
+        run = new QPushButton(layoutWidget);
         run->setObjectName(QString::fromUtf8("run"));
 
         horizontalLayout_3->addWidget(run);
 
-        step = new QPushButton(widget);
+        step = new QPushButton(layoutWidget);
         step->setObjectName(QString::fromUtf8("step"));
 
         horizontalLayout_3->addWidget(step);
 
-        reset = new QPushButton(widget);
+        reset = new QPushButton(layoutWidget);
         reset->setObjectName(QString::fromUtf8("reset"));
 
         horizontalLayout_3->addWidget(reset);
 
-        widget1 = new QWidget(centralwidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(32, 80, 391, 401));
-        verticalLayout = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(32, 80, 391, 401));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        register_table = new QTableWidget(widget1);
+        register_table = new QTableWidget(layoutWidget1);
         register_table->setObjectName(QString::fromUtf8("register_table"));
 
         horizontalLayout_6->addWidget(register_table);
 
-        flags_table = new QTableWidget(widget1);
+        flags_table = new QTableWidget(layoutWidget1);
         flags_table->setObjectName(QString::fromUtf8("flags_table"));
 
         horizontalLayout_6->addWidget(flags_table);
@@ -126,19 +126,19 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_6);
 
-        help = new QPushButton(widget1);
+        help = new QPushButton(layoutWidget1);
         help->setObjectName(QString::fromUtf8("help"));
 
         verticalLayout->addWidget(help);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        input_enable = new QPushButton(widget1);
+        input_enable = new QPushButton(layoutWidget1);
         input_enable->setObjectName(QString::fromUtf8("input_enable"));
 
         horizontalLayout_2->addWidget(input_enable);
 
-        ouput_enable = new QPushButton(widget1);
+        ouput_enable = new QPushButton(layoutWidget1);
         ouput_enable->setObjectName(QString::fromUtf8("ouput_enable"));
 
         horizontalLayout_2->addWidget(ouput_enable);
@@ -148,7 +148,7 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_3 = new QLabel(widget1);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         QFont font1;
         font1.setPointSize(10);
@@ -156,7 +156,7 @@ public:
 
         horizontalLayout->addWidget(label_3);
 
-        input_line_edit = new QLineEdit(widget1);
+        input_line_edit = new QLineEdit(layoutWidget1);
         input_line_edit->setObjectName(QString::fromUtf8("input_line_edit"));
         input_line_edit->setFont(font1);
 
@@ -167,14 +167,15 @@ public:
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_4 = new QLabel(widget1);
+        label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setFont(font1);
 
         horizontalLayout_5->addWidget(label_4);
 
-        speed = new QSlider(widget1);
+        speed = new QSlider(layoutWidget1);
         speed->setObjectName(QString::fromUtf8("speed"));
+        speed->setValue(20);
         speed->setOrientation(Qt::Horizontal);
 
         horizontalLayout_5->addWidget(speed);
@@ -184,13 +185,13 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_5 = new QLabel(widget1);
+        label_5 = new QLabel(layoutWidget1);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setFont(font1);
 
         horizontalLayout_4->addWidget(label_5);
 
-        microoperation_line_edit = new QLineEdit(widget1);
+        microoperation_line_edit = new QLineEdit(layoutWidget1);
         microoperation_line_edit->setObjectName(QString::fromUtf8("microoperation_line_edit"));
 
         horizontalLayout_4->addWidget(microoperation_line_edit);

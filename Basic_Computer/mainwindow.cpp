@@ -460,7 +460,7 @@ void MainWindow::updateVariableTable(int address)
         if(AssemblyVariable::Variables_list[i]->getAddress()==address)
         {
             this->addItem(i, 0, AssemblyVariable::Variables_list[i]->getName());
-            this->addItem(i, 1, QString::number(address, 10));
+            this->addItem(i, 1, QString::number(hardware::RAM.read(address), 10));
             this->addItem(i, 2, QString::number(hardware::RAM.read(address), 16));
         }
     }

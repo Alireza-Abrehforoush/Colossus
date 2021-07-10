@@ -30,6 +30,10 @@ Variable::Variable(const QString& line, int address, long long int line_no, QObj
     temp_value=main_part[2];
     for(int i=0;i<temp_value.size();i++)
     {
+        if(i == 0 && temp_value[i] == '-')
+        {
+            continue;
+        }
         if (temp_value[i].isDigit()==false)
         {
             this->syntax_valid=false;

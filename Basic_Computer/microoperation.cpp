@@ -150,7 +150,10 @@ void Microoperation::run(int sleep_time)
     }
     else if(this->nick_text == "STA")
     {
+        qDebug() << hardware::AC.output() << '\n';
+        qDebug() << hardware::RAM.read(hardware::AR.output()) << '\n';
         hardware::RAM.write(hardware::AR.output(), hardware::AC.output());
+        qDebug() << hardware::RAM.read(hardware::AR.output()) << '\n';
     }
     else if(this->nick_text =="MARTOPC")
     {
