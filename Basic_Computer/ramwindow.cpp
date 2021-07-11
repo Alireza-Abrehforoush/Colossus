@@ -3,6 +3,7 @@
 #include "Hardware.h"
 #include "values.h"
 #include "assembe.h"
+#include "mytime.h"
 #include <QDebug>
 #include <QThread>
 void RamWindow::closeEvent(QCloseEvent *event)
@@ -123,7 +124,7 @@ RamWindow::~RamWindow()
 void RamWindow::run()
 {
 
-    int sleep_time=(100-ui->speed->value())/**10*/;
+    int sleep_time=(100-ui->speed->value())*10;
     hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
     for(int i=0;i<AssemblyVariable::Instruction_list.size();i++)
     {
@@ -179,6 +180,8 @@ void RamWindow::updateFlags()
 
 void RamWindow::updateMicrooperationText(const QString &text)
 {
-    ui->microoperation_line_edit->setText(text);
+    QString temp = QString(text);
+    //ui->microoperation_line_edit->setText(temp);
+    qDebug() << "\n##########\n" << ui->microoperation_line_edit->text() << "\n##########\n";
     return;
 }

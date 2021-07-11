@@ -170,8 +170,9 @@ void Microoperation::run(int sleep_time)
         hardware::RAM.write(hardware::AR.output(),hardware::RAM.read(hardware::AR.output())+1);
 
     }
-    values::current_microoperation_text.setValue(text);
     mytime::delay(sleep_time);
+    values::current_microoperation_text.setValue(text);
+
 }
 
 void Microoperation::setupMicrooperation()
