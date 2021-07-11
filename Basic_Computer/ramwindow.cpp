@@ -38,13 +38,13 @@ RamWindow::RamWindow(QWidget *parent) :
     ui->register_table->setColumnCount(2);
     ui->register_table->setRowCount(8);
     ui->register_table->setHorizontalHeaderItem(0,new QTableWidgetItem("name"));
-    ui->register_table->setHorizontalHeaderItem(0,new QTableWidgetItem("value"));
+    ui->register_table->setHorizontalHeaderItem(1,new QTableWidgetItem("value"));
 
     ui->flags_table->verticalHeader()->setVisible(false);
     ui->flags_table->setColumnCount(2);
     ui->flags_table->setRowCount(7);
     ui->flags_table->setHorizontalHeaderItem(0,new QTableWidgetItem("name"));
-    ui->flags_table->setHorizontalHeaderItem(0,new QTableWidgetItem("value"));
+    ui->flags_table->setHorizontalHeaderItem(1,new QTableWidgetItem("value"));
 
     /////////////////////
     this->updateRegisters();
@@ -84,16 +84,16 @@ RamWindow::RamWindow(QWidget *parent) :
 
 
 
-     connect(&hardware::I,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::S,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::R,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::E,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::IEN,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::FGI,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
-      connect(&hardware::FGO,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::I,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::S,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::R,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::E,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::IEN,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::FGI,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
+    connect(&hardware::FGO,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
 
 
-    //connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
+    connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)
