@@ -44,7 +44,7 @@ void Register::load(long long int value)
     {
         value=value*-1;
     }
-    for(int i=0; value&&i<this->size;i++)
+    for(int i=0; i < this->size; i++)
     {
         this->value[i]=value%2;
         value/=2;
