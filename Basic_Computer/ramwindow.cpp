@@ -69,6 +69,7 @@ RamWindow::RamWindow(QWidget *parent) :
 
     }
 
+    hardware::PC.load(101);
 
     connect(&hardware::RAM, SIGNAL(valueChanged(int)), this, SLOT(updateRam(int)));
     connect(this->ui->run, SIGNAL(clicked()), this, SLOT(run()));
@@ -125,21 +126,23 @@ RamWindow::~RamWindow()
 
 void RamWindow::run()
 {
-    static int i = 0;
-    if(i >= AssemblyVariable::Instruction_list.size())
-    {
-        return;
-    }
-    int sleep_time=(100-ui->speed->value())*10;
-    hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
-
-    AssemblyVariable::Instruction_list[i].execute(sleep_time);
-//    for(; i<AssemblyVariable::Instruction_list.size(); i++)
+//    if(i >= AssemblyVariable::Instruction_list.size())
 //    {
-//        AssemblyVariable::Instruction_list[i].execute(sleep_time);
+//        return;
 //    }
-    i++;
+//    int sleep_time=(100-ui->speed->value())*10;
+//    hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
 
+//    AssemblyVariable::Instruction_list[i].execute(sleep_time);
+    for(int i = 0; i < AssemblyVariable::Instruction_list.size(); i++)
+    {
+        if(AssemblyVariable::Instruction_list[i].getAddress() == hardware::PC.output())
+        {
+            AssemblyVariable::Instruction_list[i].execute(10);
+            break;
+        }
+    }
+//    i++;
 }
 
 void RamWindow::updateRam(int address)

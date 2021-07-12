@@ -353,11 +353,6 @@ void Instruction::execute(int sleep_time)
                 Microoperation temp("SZA");
                 temp.run(sleep_time);
             }
-            else if(this->name == "BUN")
-            {
-                Microoperation temp("MARTOPC");
-                temp.run(sleep_time);
-            }
             else if(this->name == "BSA")
             {
                 Microoperation temp("BSA");
