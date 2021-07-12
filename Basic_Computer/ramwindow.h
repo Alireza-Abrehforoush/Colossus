@@ -24,6 +24,7 @@ private slots:
     void updateRegisters();
     void updateFlags();
     void updateMicrooperationText(const QString& text);
+    void speedChanged(int value);
 private:
     Ui::RamWindow *ui;
 

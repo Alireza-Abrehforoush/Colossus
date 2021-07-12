@@ -1,7 +1,7 @@
 #include "mytime.h"
 #include <QTime>
-void mytime::delay(int ms)
+
+namespace mytime
 {
-    QTime dieTime=QTime::currentTime().addMSecs(ms);
-    while(QTime::currentTime()<dieTime);
+    MyTimer m_timer;
 }

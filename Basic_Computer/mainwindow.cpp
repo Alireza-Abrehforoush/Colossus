@@ -186,13 +186,23 @@ QVector<QString> MainWindow::detectVariable(QVector<QString> total)
     {
         if(total[i].indexOf(',') >= 0)
         {
+            ////////////////
+            qDebug() << total[i] << "\n";
+            ////////////////
             Variable* kemp = new Variable(total[i], address, i, this);
             if(kemp->getSyntaxValid() == false)
             {
                 continue;
             }
             AssemblyVariable::Variables_list.push_back(kemp);
-            instructions.push_back("");
+            if(kemp->getIsInstruction() == false)
+            {
+                instructions.push_back("");
+            }
+            else
+            {
+                instructions.push_back(Variable::purify(total[i]));
+            }
             address++;
         }
         else
@@ -250,7 +260,6 @@ void MainWindow::detectInstruction(QVector<QString> total)
            {
             address++;
            }
-
        }
 
        else{
@@ -258,7 +267,7 @@ void MainWindow::detectInstruction(QVector<QString> total)
             {
                 AssemblyVariable::Instruction_list.push_back(temp);
             }
-            qDebug()<<address<<"\t"<<hardware::RAM.read(address)<<"\n";
+            //qDebug()<<address<<"\t"<<hardware::RAM.read(address)<<"\n";
 
                 if(temp.getName() == "ORG")
                 {
@@ -267,10 +276,7 @@ void MainWindow::detectInstruction(QVector<QString> total)
                 }
             address++;
        }
-
     }
-
-
 }
 
 

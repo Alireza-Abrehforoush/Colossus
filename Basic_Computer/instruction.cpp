@@ -4,6 +4,7 @@
 #include "microoperation.h"
 #include "Hardware.h"
 #include "assembe.h"
+#include "mytime.h"
 
 Instruction::Instruction(const QString &line, long long line_no, int address)
 {
@@ -78,7 +79,7 @@ Instruction::Instruction(const QString &line, long long line_no, int address)
             }
             this->var=main_part[1];
         }
-        else if(main_part[0]=="DEC"|| main_part[0]=="HEX")
+        else if(main_part[0]=="DEC"|| main_part[0]=="HEX" || main_part[0] == "BIN")
         {
             this->syntax_valid = false;
             return;
@@ -296,7 +297,8 @@ void Instruction::execute(int sleep_time)
             }
             else if(this->name == "BUN")
             {
-
+                Microoperation temp("MARTOPC");
+                temp.run(sleep_time);
             }
         }
         else
@@ -377,6 +379,7 @@ void Instruction::execute(int sleep_time)
             sc.run(sleep_time);
         }
     }
+    mytime::m_timer.start();
 }
 
 Instruction::~Instruction()

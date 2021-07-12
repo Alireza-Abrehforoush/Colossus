@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RamWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[98];
+    QByteArrayData data[12];
+    char stringdata0[117];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,12 +41,15 @@ QT_MOC_LITERAL(5, 32, 7), // "address"
 QT_MOC_LITERAL(6, 40, 15), // "updateRegisters"
 QT_MOC_LITERAL(7, 56, 11), // "updateFlags"
 QT_MOC_LITERAL(8, 68, 24), // "updateMicrooperationText"
-QT_MOC_LITERAL(9, 93, 4) // "text"
+QT_MOC_LITERAL(9, 93, 4), // "text"
+QT_MOC_LITERAL(10, 98, 12), // "speedChanged"
+QT_MOC_LITERAL(11, 111, 5) // "value"
 
     },
     "RamWindow\0closed\0\0run\0updateRam\0address\0"
     "updateRegisters\0updateFlags\0"
-    "updateMicrooperationText\0text"
+    "updateMicrooperationText\0text\0"
+    "speedChanged\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +59,7 @@ static const uint qt_meta_data_RamWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,14 +67,15 @@ static const uint qt_meta_data_RamWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x06 /* Public */,
+       1,    0,   49,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    1,   46,    2, 0x08 /* Private */,
-       6,    0,   49,    2, 0x08 /* Private */,
-       7,    0,   50,    2, 0x08 /* Private */,
-       8,    1,   51,    2, 0x08 /* Private */,
+       3,    0,   50,    2, 0x08 /* Private */,
+       4,    1,   51,    2, 0x08 /* Private */,
+       6,    0,   54,    2, 0x08 /* Private */,
+       7,    0,   55,    2, 0x08 /* Private */,
+       8,    1,   56,    2, 0x08 /* Private */,
+      10,    1,   59,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -82,6 +86,7 @@ static const uint qt_meta_data_RamWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    9,
+    QMetaType::Void, QMetaType::Int,   11,
 
        0        // eod
 };
@@ -98,6 +103,7 @@ void RamWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 3: _t->updateRegisters(); break;
         case 4: _t->updateFlags(); break;
         case 5: _t->updateMicrooperationText((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->speedChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -141,13 +147,13 @@ int RamWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

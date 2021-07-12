@@ -57,7 +57,6 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_5;
     QLineEdit *microoperation_line_edit;
-    QLabel *xyz;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -200,9 +199,6 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        xyz = new QLabel(centralwidget);
-        xyz->setObjectName(QString::fromUtf8("xyz"));
-        xyz->setGeometry(QRect(160, 490, 55, 16));
         RamWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(RamWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -232,7 +228,6 @@ public:
         label_3->setText(QCoreApplication::translate("RamWindow", "Input:", nullptr));
         label_4->setText(QCoreApplication::translate("RamWindow", "Speed:", nullptr));
         label_5->setText(QCoreApplication::translate("RamWindow", "Microoperation:", nullptr));
-        xyz->setText(QString());
     } // retranslateUi
 
 };

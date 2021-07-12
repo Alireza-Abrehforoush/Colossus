@@ -8,6 +8,7 @@ debug/main.o
 debug/mainwindow.o
 debug/memory.o
 debug/microoperation.o
+debug/mytimer.o
 debug/ramwindow.o
 debug/register.o
 debug/styles.o
@@ -20,6 +21,7 @@ debug/moc_capsulatedvalue.o
 debug/moc_flag.o
 debug/moc_mainwindow.o
 debug/moc_memory.o
+debug/moc_mytimer.o
 debug/moc_ramwindow.o
 debug/moc_register.o
 debug/moc_autocompleteaction.o

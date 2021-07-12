@@ -35,6 +35,7 @@ SOURCES += \
         mainwindow.cpp \
     memory.cpp \
     microoperation.cpp \
+    mytimer.cpp \
     ramwindow.cpp \
     register.cpp \
     styles.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
         mainwindow.h \
     memory.h \
     microoperation.h \
+    mytimer.h \
     ramwindow.h \
     register.h \
     style.h \

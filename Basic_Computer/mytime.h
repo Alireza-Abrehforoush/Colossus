@@ -1,9 +1,10 @@
-#ifndef TIME_H
-#define TIME_H
+#ifndef TIME_UGCSVYGVSV
+#define TIME_UGCSVYGVSV
+#include <mytimer.h>
 
 namespace mytime
 {
-    void delay(int ms);
+    extern MyTimer m_timer;
 }
 
 #endif // TIME_H

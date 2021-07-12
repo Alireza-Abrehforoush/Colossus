@@ -228,19 +228,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="xyz">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>490</y>
-      <width>55</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

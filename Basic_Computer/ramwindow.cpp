@@ -37,7 +37,7 @@ RamWindow::RamWindow(QWidget *parent) :
 
     ui->register_table->verticalHeader()->setVisible(false);
     ui->register_table->setColumnCount(2);
-    ui->register_table->setRowCount(8);
+    ui->register_table->setRowCount(9);
     ui->register_table->setHorizontalHeaderItem(0,new QTableWidgetItem("name"));
     ui->register_table->setHorizontalHeaderItem(1,new QTableWidgetItem("value"));
 
@@ -93,8 +93,11 @@ RamWindow::RamWindow(QWidget *parent) :
     connect(&hardware::FGI,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
     connect(&hardware::FGO,SIGNAL(valueChanged()),this,SLOT(updateFlags()));
 
-
     connect(&values::current_microoperation_text, SIGNAL(valueChanged(const QString&)), this, SLOT(updateMicrooperationText(const QString&)));
+
+    connect(&mytime::m_timer, SIGNAL(timeout()), this, SLOT(run()));
+
+    connect(this->ui->speed, SIGNAL(valueChanged(int)), this, SLOT(speedChanged(int)));
 }
 
 void RamWindow::addItem(int row, int column, const QString &content)
@@ -104,7 +107,6 @@ void RamWindow::addItem(int row, int column, const QString &content)
     address->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
     address->setTextAlignment(Qt::AlignCenter);
     ui->tableWidget->setItem(row, column, address);
-
 }
 
 void RamWindow::addItem(QTableWidget *table, int row, int column, const QString &content)
@@ -123,13 +125,20 @@ RamWindow::~RamWindow()
 
 void RamWindow::run()
 {
-
+    static int i = 0;
+    if(i >= AssemblyVariable::Instruction_list.size())
+    {
+        return;
+    }
     int sleep_time=(100-ui->speed->value())*10;
     hardware::PC.load(AssemblyVariable::Instruction_list[0].getAddress());
-    for(int i=0;i<AssemblyVariable::Instruction_list.size();i++)
-    {
-        AssemblyVariable::Instruction_list[i].execute(sleep_time);
-    }
+
+    AssemblyVariable::Instruction_list[i].execute(sleep_time);
+//    for(; i<AssemblyVariable::Instruction_list.size(); i++)
+//    {
+//        AssemblyVariable::Instruction_list[i].execute(sleep_time);
+//    }
+    i++;
 
 }
 
@@ -157,6 +166,8 @@ void RamWindow::updateRegisters()
     this->addItem(ui->register_table,6,1,QString::number(hardware::AC.output()));
     this->addItem(ui->register_table,7,0,"SC");
     this->addItem(ui->register_table,7,1,QString::number(hardware::SC.output()));
+    this->addItem(ui->register_table,8,0,"PC");
+    this->addItem(ui->register_table,8,1,QString::number(hardware::PC.output()));
 
 }
 
@@ -180,8 +191,13 @@ void RamWindow::updateFlags()
 
 void RamWindow::updateMicrooperationText(const QString &text)
 {
-    QString temp = QString(text);
-    //ui->microoperation_line_edit->setText(temp);
-    qDebug() << "\n##########\n" << ui->microoperation_line_edit->text() << "\n##########\n";
+    ui->microoperation_line_edit->setText(text);
+    return;
+}
+
+void RamWindow::speedChanged(int value)
+{
+    int sleep_time = (100 - value) * 10;
+    mytime::m_timer.setInterval(sleep_time);
     return;
 }

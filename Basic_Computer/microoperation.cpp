@@ -65,9 +65,9 @@ void Microoperation::run(int sleep_time)
     }
     else if(this->nick_text == "CMA")
     {
-        qDebug()<<hardware::AC.output();
+        //qDebug()<<hardware::AC.output();
         hardware::AC.onesComplement();
-        qDebug()<<hardware::AC.output();
+        //qDebug()<<hardware::AC.output();
     }
     else if(this->nick_text == "CLA")
     {
@@ -170,7 +170,7 @@ void Microoperation::run(int sleep_time)
         hardware::RAM.write(hardware::AR.output(),hardware::RAM.read(hardware::AR.output())+1);
 
     }
-    mytime::delay(sleep_time);
+//    mytime::delay(sleep_time);
     values::current_microoperation_text.setValue(text);
 
 }
